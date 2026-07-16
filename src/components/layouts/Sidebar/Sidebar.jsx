@@ -11,36 +11,58 @@ function Sidebar() {
   return (
     <aside className={styles.sidebar}>
       <nav>
-        <ul className={styles.navList}>
-          <li>
-            <button className={`${styles.navItem} ${styles.active}`}>
-              <LayoutDashboard size={20} />
-              <span>Dashboard</span>
-            </button>
-          </li>
+  <div className={styles.section}>
+    <h3 className={styles.sectionTitle}>Main</h3>
 
-          <li>
-            <button className={styles.navItem}>
-              <CheckSquare size={20} />
-              <span>Tasks</span>
-            </button>
-          </li>
+    <ul className={styles.navList}>
+      <li>
+        <button className={`${styles.navItem} ${styles.active}`}>
+          <div className={styles.iconContainer}>
+            <LayoutDashboard size={18} />
+          </div>
 
-          <li>
-            <button className={styles.navItem}>
-              <NotebookPen size={20} />
-              <span>Notes</span>
-            </button>
-          </li>
+          <span>Dashboard</span>
+        </button>
+      </li>
 
-          <li>
-            <button className={styles.navItem}>
-              <Settings size={20} />
-              <span>Settings</span>
-            </button>
-          </li>
-        </ul>
-      </nav>
+      <li>
+        <button className={styles.navItem}>
+          <div className={styles.iconContainer}>
+            <CheckSquare size={18} />
+          </div>
+
+          <span>Tasks</span>
+        </button>
+      </li>
+
+      <li>
+        <button className={styles.navItem}>
+          <div className={styles.iconContainer}>
+            <NotebookPen size={18} />
+          </div>
+
+          <span>Notes</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <div className={styles.section}>
+    <h3 className={styles.sectionTitle}>System</h3>
+
+    <ul className={styles.navList}>
+      <li>
+        <button className={styles.navItem}>
+          <div className={styles.iconContainer}>
+            <Settings size={18} />
+          </div>
+
+          <span>Settings</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>
     </aside>
   );
 }
