@@ -50,3 +50,55 @@
   font-size: 0.875rem;
   font-weight: 600;
 }
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menuButton {
+  display: none;
+
+  border: none;
+  background: transparent;
+
+  cursor: pointer;
+
+  color: var(--color-text);
+}
+
+@media (max-width: 768px) {
+  .menuButton {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menuButton {
+  display: none;
+
+  border: none;
+  background: transparent;
+
+  cursor: pointer;
+
+  color: var(--color-text);
+}
+
+@media (max-width: 768px) {
+  .menuButton {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+  }
+}
