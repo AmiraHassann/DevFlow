@@ -1,5 +1,7 @@
 import styles from "./Sidebar.module.css";
 
+import { NavLink } from "react-router-dom";
+
 import {
   X,
   LayoutDashboard,
@@ -39,35 +41,54 @@ function Sidebar({
 
             <ul className={styles.navList}>
               <li>
-                <button
-                  className={`${styles.navItem} ${styles.active}`}
+                <NavLink
+                  to="/dashboard"
+                  className={({ isActive }) =>
+                    `${styles.navItem} ${
+                      isActive ? styles.active : ""
+                    }`
+                  }
                 >
                   <div className={styles.iconContainer}>
                     <LayoutDashboard size={18} />
                   </div>
 
                   <span>Dashboard</span>
-                </button>
+                </NavLink>
               </li>
 
               <li>
-                <button className={styles.navItem}>
+                <NavLink
+                  to="/tasks"
+                  className={({ isActive }) =>
+                    `${styles.navItem} ${
+                      isActive ? styles.active : ""
+                    }`
+                  }
+                >
                   <div className={styles.iconContainer}>
                     <CheckSquare size={18} />
                   </div>
 
                   <span>Tasks</span>
-                </button>
+                </NavLink>
               </li>
 
               <li>
-                <button className={styles.navItem}>
+                <NavLink
+                  to="/notes"
+                  className={({ isActive }) =>
+                    `${styles.navItem} ${
+                      isActive ? styles.active : ""
+                    }`
+                  }
+                >
                   <div className={styles.iconContainer}>
                     <NotebookPen size={18} />
                   </div>
 
                   <span>Notes</span>
-                </button>
+                </NavLink>
               </li>
             </ul>
           </div>
@@ -77,13 +98,20 @@ function Sidebar({
 
             <ul className={styles.navList}>
               <li>
-                <button className={styles.navItem}>
+                <NavLink
+                  to="/settings"
+                  className={({ isActive }) =>
+                    `${styles.navItem} ${
+                      isActive ? styles.active : ""
+                    }`
+                  }
+                >
                   <div className={styles.iconContainer}>
                     <Settings size={18} />
                   </div>
 
                   <span>Settings</span>
-                </button>
+                </NavLink>
               </li>
             </ul>
           </div>

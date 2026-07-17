@@ -1,0 +1,48 @@
+.tasks {
+  flex: 1;
+
+  padding: 32px;
+
+  background-color: var(--color-background);
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.header h1 {
+  margin-bottom: 8px;
+
+  color: var(--color-text);
+
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.header p {
+  color: #6b7280;
+}
+
+.content {
+  background-color: var(--color-surface);
+
+  border-radius: var(--radius-lg);
+
+  padding: 32px;
+
+  box-shadow: var(--shadow-md);
+
+  min-height: 300px;
+}
+
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 200px;
+
+  color: #9ca3af;
+
+  font-size: 1rem;
+}
