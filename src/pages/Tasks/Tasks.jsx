@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 
 import styles from "./Tasks.module.css";
+import Swal from "sweetalert2";
 
 import Button from "../../components/ui/Button/Button";
 import Input from "../../components/ui/Input/Input";
@@ -58,11 +59,35 @@ function Tasks() {
   };
 
   const handleDeleteTask = (taskId) => {
-    const updatedTasks = tasks.filter(
-      (task) => task.id !== taskId
-    );
+  Swal.fire({
+    title: "Delete Task?",
+    text: "This action cannot be undone.",
+    icon: "warning",
 
-    setTasks(updatedTasks);
+    showCancelButton: true,
+
+    confirmButtonText: "Delete",
+    cancelButtonText: "Cancel",
+
+    confirmButtonColor: "#ef4444",
+    cancelButtonColor: "#6b7280",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const updatedTasks = tasks.filter(
+        (task) => task.id !== taskId
+      );
+
+      setTasks(updatedTasks);
+
+      Swal.fire({
+        title: "Deleted!",
+        text: "The task has been deleted.",
+        icon: "success",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+    }
+  });
   };
 
   const handleToggleTask = (taskId) => {
