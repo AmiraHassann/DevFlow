@@ -8,9 +8,14 @@ import Input from "../../components/ui/Input/Input";
 function Tasks() {
   const [taskTitle, setTaskTitle] = useState("");
   const [tasks, setTasks] = useState([]);
+  const [error, setError] = useState("");
 
   const handleSubmit = () => {
-  if (!taskTitle.trim()) return;
+  if (!taskTitle.trim()) {
+    setError("Please enter a task first.");
+
+    return;
+  }
 
   const newTask = {
     id: Date.now(),
@@ -20,7 +25,17 @@ function Tasks() {
   setTasks([...tasks, newTask]);
 
   setTaskTitle("");
+
+  setError("");
 };
+
+  const handleDeleteTask = (taskId) => {
+    const updatedTasks = tasks.filter(
+      (task) => task.id !== taskId
+    );
+
+    setTasks(updatedTasks);
+  };
 
   return (
     <main className={styles.tasks}>
@@ -39,9 +54,10 @@ function Tasks() {
           <Input
             placeholder="Enter task title"
             value={taskTitle}
-            onChange={(e) =>
-              setTaskTitle(e.target.value)
-            }
+            onChange={(e) => {
+            setTaskTitle(e.target.value);
+            setError("");
+          }}
           />
 
           <Button onClick={handleSubmit}>
@@ -49,22 +65,37 @@ function Tasks() {
           </Button>
         </div>
 
+          {error && (
+          <p className={styles.errorMessage}>
+            {error}
+          </p>
+        )}
+
         {tasks.length === 0 ? (
-  <div className={styles.emptyState}>
-    No tasks available yet.
-  </div>
-) : (
-  <div className={styles.taskList}>
-    {tasks.map((task) => (
-      <div
-        key={task.id}
-        className={styles.taskCard}
-      >
-        {task.title}
-      </div>
-    ))}
-  </div>
-)}
+          <div className={styles.emptyState}>
+            No tasks available yet.
+          </div>
+        ) : (
+          <div className={styles.taskList}>
+            {tasks.map((task) => (
+              <div
+                key={task.id}
+                className={styles.taskCard}
+              >
+                <span>{task.title}</span>
+
+                <button
+                  className={styles.deleteButton}
+                  onClick={() =>
+                    handleDeleteTask(task.id)
+                  }
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </main>
   );

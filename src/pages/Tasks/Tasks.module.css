@@ -69,6 +69,10 @@
 }
 
 .taskCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
   padding: 16px;
 
   background-color: var(--color-surface);
@@ -77,9 +81,41 @@
 
   border-radius: var(--radius-md);
 
-  font-weight: 500;
-
   color: var(--color-text);
+
+  font-weight: 500;
+}
+
+.errorMessage {
+  margin-bottom: 20px;
+
+  color: var(--color-danger);
+
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.deleteButton {
+  border: none;
+
+  background-color: var(--color-danger);
+
+  color: white;
+
+  padding: 8px 14px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  transition: opacity 0.2s ease;
+}
+
+.deleteButton:hover {
+  opacity: 0.9;
 }
 
 @media (max-width: 768px) {

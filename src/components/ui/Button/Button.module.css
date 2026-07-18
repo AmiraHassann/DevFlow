@@ -1,12 +1,18 @@
 .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
   border: none;
 
   background-color: var(--color-primary);
   color: white;
 
-  padding: 12px 18px;
+  padding: 10px 15px;
+  width: 8rem;
 
-  border-radius: var(--radius-md);
+  border-radius: 10px;
 
   font-size: 0.95rem;
   font-weight: 600;
@@ -17,9 +23,11 @@
 }
 
 .button:hover {
-  opacity: 0.9;
+  transform: translateY(-1px);
+
+  box-shadow: var(--shadow-md);
 }
 
 .button:active {
-  transform: scale(0.98);
+  transform: translateY(0);
 }
