@@ -29,6 +29,50 @@
   font-size: 0.95rem;
 }
 
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 16px;
+
+  margin-bottom: 24px;
+}
+
+.statCard {
+  background: var(--color-surface);
+
+  padding: 20px;
+
+  border-radius: 16px;
+
+  box-shadow: var(--shadow-sm);
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  transition: all 0.2s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-2px);
+
+  box-shadow: var(--shadow-md);
+}
+
+.statCard span {
+  color: #6b7280;
+
+  font-size: 0.9rem;
+}
+
+.statCard strong {
+  font-size: 1.5rem;
+
+  color: var(--color-text);
+}
+
 .content {
   background-color: var(--color-surface);
 
@@ -39,6 +83,23 @@
   box-shadow: var(--shadow-md);
 
   min-height: 300px;
+}
+
+.form {
+  display: flex;
+
+  gap: 12px;
+
+  margin-bottom: 24px;
+}
+
+.errorMessage {
+  margin-bottom: 20px;
+
+  color: var(--color-danger);
+
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .emptyState {
@@ -54,13 +115,6 @@
   font-weight: 500;
 }
 
-.form {
-  display: flex;
-  gap: 12px;
-
-  margin-bottom: 24px;
-}
-
 .taskList {
   display: flex;
   flex-direction: column;
@@ -73,49 +127,131 @@
   align-items: center;
   justify-content: space-between;
 
-  padding: 16px;
+  padding: 18px;
 
   background-color: var(--color-surface);
 
-  border: 1px solid #e5e7eb;
+  border: 1px solid #eef2f7;
 
-  border-radius: var(--radius-md);
+  border-radius: 16px;
 
-  color: var(--color-text);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
 
+  transition: all 0.2s ease;
+}
+
+.taskCard:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(79, 70, 229, 0.2);
+
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+}
+
+.taskInfo {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  flex: 1;
+}
+
+.taskInfo span {
   font-weight: 500;
 }
 
-.errorMessage {
-  margin-bottom: 20px;
+.completedTask {
+  text-decoration: line-through;
 
-  color: var(--color-danger);
-
-  font-size: 0.9rem;
-  font-weight: 500;
+  color: #9ca3af;
 }
 
-.deleteButton {
-  border: none;
+.checkButton {
+  width: 24px;
+  height: 24px;
 
-  background-color: var(--color-danger);
+  border: 2px solid #d1d5db;
 
-  color: white;
+  border-radius: 50%;
 
-  padding: 8px 14px;
+  background: transparent;
 
-  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
 
   cursor: pointer;
 
-  font-size: 0.85rem;
-  font-weight: 600;
+  color: transparent;
 
-  transition: opacity 0.2s ease;
+  transition: all 0.2s ease;
 }
 
-.deleteButton:hover {
-  opacity: 0.9;
+.checkButton:hover {
+  border-color: var(--color-primary);
+}
+
+.checkButtonActive {
+  background-color: var(--color-primary);
+
+  border-color: var(--color-primary);
+
+  color: white;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  opacity: 0;
+
+  transition: all 0.2s ease;
+}
+
+.taskCard:hover .actions {
+  opacity: 1;
+}
+
+.actionButton {
+  width: 32px;
+  height: 32px;
+
+  border: none;
+
+  background: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  color: #9ca3af;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.actionButton:hover {
+  background: #f3f4f6;
+
+  color: var(--color-text);
+}
+
+.deleteAction {
+  color: #ef4444;
+}
+
+.deleteAction:hover {
+  background: rgba(239, 68, 68, 0.1);
+
+  color: #dc2626;
 }
 
 @media (max-width: 768px) {
@@ -125,9 +261,14 @@
 
   .header {
     flex-direction: column;
+
     align-items: flex-start;
 
     gap: 16px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
   }
 
   .content {
@@ -135,8 +276,20 @@
   }
 
   .form {
-  flex-direction: column;
+    flex-direction: column;
   }
 
-}
+  .taskCard {
+    flex-direction: column;
 
+    align-items: flex-start;
+
+    gap: 16px;
+  }
+
+  .actions {
+    opacity: 1;
+
+    align-self: flex-end;
+  }
+}

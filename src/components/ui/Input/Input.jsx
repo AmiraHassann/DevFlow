@@ -5,6 +5,8 @@ function Input({
   placeholder,
   value,
   onChange,
+  onKeyDown,
+  onBlur,
 }) {
   return (
     <input
@@ -12,6 +14,8 @@ function Input({
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      onKeyDown={onKeyDown}
+      onBlur={onBlur}
       className={styles.input}
     />
   );
