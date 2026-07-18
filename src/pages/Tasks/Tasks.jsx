@@ -13,6 +13,7 @@ import Input from "../../components/ui/Input/Input";
 
 function Tasks() {
   const [taskTitle, setTaskTitle] = useState("");
+  const [filter, setFilter] = useState("all");
 
   const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem("tasks");
@@ -111,6 +112,18 @@ function Tasks() {
   const pendingTasks =
     totalTasks - completedTasks;
 
+  const filteredTasks = tasks.filter((task) => {
+  if (filter === "completed") {
+    return task.completed;
+  }
+
+  if (filter === "pending") {
+    return !task.completed;
+  }
+
+  return true;
+  });  
+
   return (
     <main className={styles.tasks}>
       <div className={styles.header}>
@@ -140,6 +153,35 @@ function Tasks() {
         </div>
       </div>
 
+      <div className={styles.filters}>
+        <button
+          className={`${styles.filterButton} ${
+            filter === "all" ? styles.activeFilter : ""
+          }`}
+          onClick={() => setFilter("all")}
+        >
+          All Tasks
+        </button>
+
+        <button
+          className={`${styles.filterButton} ${
+            filter === "completed" ? styles.activeFilter : ""
+          }`}
+          onClick={() => setFilter("completed")}
+        >
+          Completed
+        </button>
+
+        <button
+          className={`${styles.filterButton} ${
+            filter === "pending" ? styles.activeFilter : ""
+          }`}
+          onClick={() => setFilter("pending")}
+        >
+          Pending
+        </button>
+      </div>
+
       <div className={styles.content}>
         <div className={styles.form}>
           <Input
@@ -167,13 +209,17 @@ function Tasks() {
           </p>
         )}
 
-        {tasks.length === 0 ? (
+        {filteredTasks.length === 0 ? (
           <div className={styles.emptyState}>
-            No tasks available yet.
+            {filter === "completed"
+            ? "No completed tasks found."
+            : filter === "pending"
+            ? "No pending tasks found."
+            : "No tasks available yet."}
           </div>
         ) : (
           <div className={styles.taskList}>
-            {tasks.map((task) => (
+            {filteredTasks.map((task) => (
           <div
             key={task.id}
             className={styles.taskCard}
