@@ -18,8 +18,17 @@ function Tasks() {
   const [searchTerm, setSearchTerm] =
   useState("");
 
+  const [isStatusOpen, setIsStatusOpen] =
+  useState(false);
+
+  const [isPriorityOpen, setIsPriorityOpen] =
+  useState(false);
+
   const [priority, setPriority] =
   useState("medium");
+
+  const [priorityFilter, setPriorityFilter] =
+  useState("all");
 
   const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem("tasks");
@@ -30,6 +39,9 @@ function Tasks() {
   });
 
   const [error, setError] = useState("");
+
+  const [sortBy, setSortBy] =
+  useState("newest");
 
   const [editingTaskId, setEditingTaskId] =
     useState(null);
@@ -137,7 +149,7 @@ function Tasks() {
     totalTasks - completedTasks;
 
   const filteredTasks = tasks.filter((task) => {
-  const matchesFilter =
+  const matchesStatus =
     filter === "completed"
       ? task.completed
       : filter === "pending"
@@ -149,7 +161,16 @@ function Tasks() {
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
 
-  return matchesFilter && matchesSearch;
+  const matchesPriority =
+    priorityFilter === "all"
+      ? true
+      : task.priority === priorityFilter;
+
+  return (
+    matchesStatus &&
+    matchesSearch &&
+    matchesPriority
+  );
   });
 
   return (
@@ -181,36 +202,7 @@ function Tasks() {
         </div>
       </div>
 
-      <div className={styles.filters}>
-        <button
-          className={`${styles.filterButton} ${
-            filter === "all" ? styles.activeFilter : ""
-          }`}
-          onClick={() => setFilter("all")}
-        >
-          All Tasks
-        </button>
-
-        <button
-          className={`${styles.filterButton} ${
-            filter === "completed" ? styles.activeFilter : ""
-          }`}
-          onClick={() => setFilter("completed")}
-        >
-          Completed
-        </button>
-
-        <button
-          className={`${styles.filterButton} ${
-            filter === "pending" ? styles.activeFilter : ""
-          }`}
-          onClick={() => setFilter("pending")}
-        >
-          Pending
-        </button>
-      </div>
-
-      <div className={styles.searchContainer}>
+      <div className={styles.toolbar}>
         <Input
           placeholder="Search tasks..."
           value={searchTerm}
@@ -218,7 +210,104 @@ function Tasks() {
             setSearchTerm(e.target.value)
           }
         />
-      </div>
+
+  <div className={styles.toolbarFilters}>
+    <div className={styles.filterCard}>
+
+  <button
+    className={styles.filterCardButton}
+    onClick={() =>
+      setIsStatusOpen(!isStatusOpen)
+    }
+  >
+    Status: {filter}
+  </button>
+
+  {isStatusOpen && (
+    <div className={styles.popover}>
+      <button
+        onClick={() => {
+          setFilter("all");
+          setIsStatusOpen(false);
+        }}
+      >
+        All
+      </button>
+
+      <button
+        onClick={() => {
+          setFilter("completed");
+          setIsStatusOpen(false);
+        }}
+      >
+        Completed
+      </button>
+
+      <button
+        onClick={() => {
+          setFilter("pending");
+          setIsStatusOpen(false);
+        }}
+      >
+        Pending
+      </button>
+    </div>
+  )}
+</div>
+
+   <div className={styles.filterCard}>
+
+  <button
+    className={styles.filterCardButton}
+    onClick={() =>
+      setIsPriorityOpen(!isPriorityOpen)
+    }
+  >
+    Priority: {priorityFilter}
+  </button>
+
+  {isPriorityOpen && (
+    <div className={styles.popover}>
+      <button
+        onClick={() => {
+          setPriorityFilter("all");
+          setIsPriorityOpen(false);
+        }}
+      >
+        All
+      </button>
+
+      <button
+        onClick={() => {
+          setPriorityFilter("high");
+          setIsPriorityOpen(false);
+        }}
+      >
+        High
+      </button>
+
+      <button
+        onClick={() => {
+          setPriorityFilter("medium");
+          setIsPriorityOpen(false);
+        }}
+      >
+        Medium
+      </button>
+
+      <button
+        onClick={() => {
+          setPriorityFilter("low");
+          setIsPriorityOpen(false);
+        }}
+      >
+        Low
+      </button>
+    </div>
+  )}
+</div>
+  </div>
+</div>
 
       <div className={styles.content}>
         <div className={styles.form}>
