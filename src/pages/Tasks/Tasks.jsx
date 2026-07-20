@@ -7,14 +7,19 @@ import {
 } from "lucide-react";
 
 import styles from "./Tasks.module.css";
-import Swal from "sweetalert2";
 
 import Button from "../../components/ui/Button/Button";
 import Input from "../../components/ui/Input/Input";
+import Modal from "../../components/ui/Modal/Modal";
 
 function Tasks() {
   const [taskTitle, setTaskTitle] = useState("");
   const [filter, setFilter] = useState("all");
+  const [searchTerm, setSearchTerm] =
+  useState("");
+
+  const [priority, setPriority] =
+  useState("medium");
 
   const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem("tasks");
@@ -46,48 +51,42 @@ function Tasks() {
     }
 
     const newTask = {
-      id: Date.now(),
-      title: taskTitle,
-      completed: false,
+    id: Date.now(),
+    title: taskTitle,
+    completed: false,
+    priority,
     };
 
     setTasks([...tasks, newTask]);
 
     setTaskTitle("");
 
+    setPriority("medium");
+
     setError("");
   };
 
+  const [isModalOpen, setIsModalOpen] =
+  useState(false);
+
+  const [selectedTaskId, setSelectedTaskId] =
+  useState(null);
+
   const handleDeleteTask = (taskId) => {
-  Swal.fire({
-    title: "Delete Task?",
-    text: "This action cannot be undone.",
-    icon: "warning",
+    setIsModalOpen(true);
+    setSelectedTaskId(taskId);
+  };
 
-    showCancelButton: true,
+  const confirmDeleteTask = () => {
+  const updatedTasks = tasks.filter(
+    (task) => task.id !== selectedTaskId
+  );
 
-    confirmButtonText: "Delete",
-    cancelButtonText: "Cancel",
+  setTasks(updatedTasks);
 
-    confirmButtonColor: "#ef4444",
-    cancelButtonColor: "#6b7280",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      const updatedTasks = tasks.filter(
-        (task) => task.id !== taskId
-      );
+  setSelectedTaskId(null);
 
-      setTasks(updatedTasks);
-
-      Swal.fire({
-        title: "Deleted!",
-        text: "The task has been deleted.",
-        icon: "success",
-        timer: 1500,
-        showConfirmButton: false,
-      });
-    }
-  });
+  setIsModalOpen(false); 
   };
 
   const handleToggleTask = (taskId) => {
@@ -138,16 +137,20 @@ function Tasks() {
     totalTasks - completedTasks;
 
   const filteredTasks = tasks.filter((task) => {
-  if (filter === "completed") {
-    return task.completed;
-  }
+  const matchesFilter =
+    filter === "completed"
+      ? task.completed
+      : filter === "pending"
+      ? !task.completed
+      : true;
 
-  if (filter === "pending") {
-    return !task.completed;
-  }
+  const matchesSearch =
+    task.title
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
 
-  return true;
-  });  
+  return matchesFilter && matchesSearch;
+  });
 
   return (
     <main className={styles.tasks}>
@@ -207,6 +210,16 @@ function Tasks() {
         </button>
       </div>
 
+      <div className={styles.searchContainer}>
+        <Input
+          placeholder="Search tasks..."
+          value={searchTerm}
+          onChange={(e) =>
+            setSearchTerm(e.target.value)
+          }
+        />
+      </div>
+
       <div className={styles.content}>
         <div className={styles.form}>
           <Input
@@ -222,7 +235,44 @@ function Tasks() {
             }
           }}
           />
+          <div className={styles.prioritySelector}>
+          <button
+            type="button"
+            className={`${styles.priorityOption} ${
+              priority === "high"
+                ? styles.highActive
+                : ""
+            }`}
+            onClick={() => setPriority("high")}
+          >
+            High
+          </button>
 
+          <button
+            type="button"
+            className={`${styles.priorityOption} ${
+              priority === "medium"
+                ? styles.mediumActive
+                : ""
+            }`}
+            onClick={() => setPriority("medium")}
+          >
+            Medium
+          </button>
+
+          <button
+            type="button"
+            className={`${styles.priorityOption} ${
+              priority === "low"
+                ? styles.lowActive
+                : ""
+            }`}
+            onClick={() => setPriority("low")}
+          >
+            Low
+          </button>
+        </div>
+      
           <Button onClick={handleSubmit}>
             Add Task
           </Button>
@@ -235,13 +285,15 @@ function Tasks() {
         )}
 
         {filteredTasks.length === 0 ? (
-          <div className={styles.emptyState}>
-            {filter === "completed"
+         <div className={styles.emptyState}>
+          {searchTerm
+            ? "No matching tasks found."
+            : filter === "completed"
             ? "No completed tasks found."
             : filter === "pending"
             ? "No pending tasks found."
             : "No tasks available yet."}
-          </div>
+        </div>
         ) : (
           <div className={styles.taskList}>
             {filteredTasks.map((task) => (
@@ -269,19 +321,20 @@ function Tasks() {
               </button>
 
               {editingTaskId === task.id ? (
-                <Input
-                  value={editValue}
-                  onChange={(e) =>
-                    setEditValue(e.target.value)
+              <Input
+                value={editValue}
+                onChange={(e) =>
+                  setEditValue(e.target.value)
+                }
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleSaveTask();
                   }
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      handleSaveTask();
-                    }
-                  }}
-                  onBlur={handleSaveTask}
-                />
-              ) : (
+                }}
+                onBlur={handleSaveTask}
+              />
+            ) : (
+              <>
                 <span
                   className={
                     task.completed
@@ -291,7 +344,16 @@ function Tasks() {
                 >
                   {task.title}
                 </span>
-              )}
+
+                <div
+                  className={`${styles.priorityBadge} ${
+                    styles[task.priority]
+                  }`}
+                >
+                  {task.priority}
+                </div>
+              </>
+            )}
             </div>
 
             <div className={styles.actions}>
@@ -321,6 +383,17 @@ function Tasks() {
           </div>
         )}
       </div>
+      {isModalOpen && (
+      <Modal
+        title="Delete Task"
+        message="Are you sure you want to delete this task?"
+        onConfirm={confirmDeleteTask}
+        onClose={() => {
+          setIsModalOpen(false);
+          setSelectedTaskId(null);
+        }}
+      />
+    )}
     </main>
   );
 }
