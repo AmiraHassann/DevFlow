@@ -274,6 +274,8 @@
   gap: 12px;
 
   flex-wrap: wrap;
+
+  margin-top: 16px;
 }
 
 .toolbarSelect {
@@ -323,6 +325,19 @@
   padding: 12px 16px;
 
   min-width: 160px;
+
+  transition: all 0.2s ease;
+
+  cursor: pointer;
+}
+
+.filterCard:hover {
+  border-color: var(--color-primary);
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 20px
+    rgba(15, 23, 42, 0.08);
 }
 
 .filterCard span {
@@ -336,17 +351,30 @@
 }
 
 .filterCardButton {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 8px;
+
+  width: 100%;
+
   border: none;
 
   background: transparent;
 
   cursor: pointer;
 
-  font-size: 0.95rem;
-
   font-weight: 600;
+}
 
-  color: #0f172a;
+.filterCardActive {
+  border-color: var(--color-primary);
+
+  box-shadow: 0 0 0 4px
+    rgba(79, 70, 229, 0.1);
 }
 
 .popover {
@@ -370,7 +398,20 @@
   overflow: hidden;
 
   z-index: 100;
-}
+  
+  animation: fadeIn 0.15s ease;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
 .popover button {
   width: 100%;
@@ -389,7 +430,15 @@
 }
 
 .popover button:hover {
-  background: #f8fafc;
+  background: #f3f3f7;
+}
+
+.chevron {
+  transition: transform 0.2s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
 }
 
 .priorityBadge {

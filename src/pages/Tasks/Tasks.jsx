@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import {
   Check,
   Pencil,
   Trash2,
+  ChevronDown,
+  ListFilter,
+  Flag
 } from "lucide-react";
 
 import styles from "./Tasks.module.css";
@@ -29,6 +32,7 @@ function Tasks() {
 
   const [priorityFilter, setPriorityFilter] =
   useState("all");
+  
 
   const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem("tasks");
@@ -40,8 +44,8 @@ function Tasks() {
 
   const [error, setError] = useState("");
 
-  const [sortBy, setSortBy] =
-  useState("newest");
+  const statusRef = useRef(null);
+  const priorityRef = useRef(null);
 
   const [editingTaskId, setEditingTaskId] =
     useState(null);
@@ -55,6 +59,36 @@ function Tasks() {
       JSON.stringify(tasks)
     );
   }, [tasks]);
+
+  useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (
+      statusRef.current &&
+      !statusRef.current.contains(event.target)
+    ) {
+      setIsStatusOpen(false);
+    }
+
+    if (
+      priorityRef.current &&
+      !priorityRef.current.contains(event.target)
+    ) {
+      setIsPriorityOpen(false);
+    }
+  };
+
+  document.addEventListener(
+    "mousedown",
+    handleClickOutside
+  );
+
+  return () => {
+    document.removeEventListener(
+      "mousedown",
+      handleClickOutside
+    );
+  };
+}, []);
 
   const handleSubmit = () => {
     if (!taskTitle.trim()) {
@@ -212,15 +246,32 @@ function Tasks() {
         />
 
   <div className={styles.toolbarFilters}>
-    <div className={styles.filterCard}>
-
+    <div
+    ref={statusRef}
+    className={`${styles.filterCard} ${
+    isStatusOpen
+      ? styles.filterCardActive
+      : ""
+  }`}
+    >
   <button
     className={styles.filterCardButton}
     onClick={() =>
       setIsStatusOpen(!isStatusOpen)
     }
-  >
-    Status: {filter}
+  ><ListFilter size={16} />
+    { filter === "all"
+        ? "Status"
+        : filter.charAt(0).toUpperCase() +
+          filter.slice(1)}
+     <ChevronDown 
+        size={16}   
+        className={
+        isStatusOpen
+          ? styles.chevronOpen
+          : styles.chevron
+        }
+/>
   </button>
 
   {isStatusOpen && (
@@ -254,16 +305,32 @@ function Tasks() {
     </div>
   )}
 </div>
-
-   <div className={styles.filterCard}>
-
+   <div
+   ref={priorityRef}
+   className={`${styles.filterCard} ${
+    isPriorityOpen
+      ? styles.filterCardActive
+      : ""
+  }`}
+   >
   <button
     className={styles.filterCardButton}
     onClick={() =>
       setIsPriorityOpen(!isPriorityOpen)
     }
-  >
-    Priority: {priorityFilter}
+  ><Flag size={16} />
+    {
+      priorityFilter === "all"
+        ? "Priority"
+        : priorityFilter.charAt(0).toUpperCase() +
+          priorityFilter.slice(1)
+    }<ChevronDown size={16}
+     className={
+      isPriorityOpen
+        ? styles.chevronOpen
+        : styles.chevron
+  }
+ />
   </button>
 
   {isPriorityOpen && (
