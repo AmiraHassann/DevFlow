@@ -555,6 +555,22 @@
   max-width: 400px;
 }
 
+.taskMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dueDate {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.overdueDate {
+  color: #ef4444;
+  font-weight: 600;
+}
+
 @media (max-width: 768px) {
   .tasks {
     padding: 20px;

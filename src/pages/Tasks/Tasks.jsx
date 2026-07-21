@@ -21,6 +21,9 @@ function Tasks() {
   const [priority, setPriority] =
     useState("medium");
 
+  const [dueDate, setDueDate] =
+    useState("");
+  
   const [error, setError] =
     useState("");
 
@@ -154,11 +157,14 @@ function Tasks() {
       title: taskTitle,
       completed: false,
       priority,
+      dueDate,
     };
 
     setTasks([...tasks, newTask]);
 
     setTaskTitle("");
+
+    setDueDate("");
 
     setPriority("medium");
 
@@ -307,38 +313,22 @@ function Tasks() {
 {/* ===== Stats ===== */}
       <TaskStats
         totalTasks={totalTasks}
-        completedTasks={
-          completedTasks
-        }
+        completedTasks={completedTasks}
         pendingTasks={pendingTasks}
       />
 
 {/* ===== Toolbar ===== */}
       <TaskToolbar
         searchTerm={searchTerm}
-        setSearchTerm={
-          setSearchTerm
-        }
+        setSearchTerm={setSearchTerm}
         filter={filter}
         setFilter={setFilter}
-        priorityFilter={
-          priorityFilter
-        }
-        setPriorityFilter={
-          setPriorityFilter
-        }
-        isStatusOpen={
-          isStatusOpen
-        }
-        setIsStatusOpen={
-          setIsStatusOpen
-        }
-        isPriorityOpen={
-          isPriorityOpen
-        }
-        setIsPriorityOpen={
-          setIsPriorityOpen
-        }
+        priorityFilter={priorityFilter}
+        setPriorityFilter={setPriorityFilter}
+        isStatusOpen={isStatusOpen}
+        setIsStatusOpen={setIsStatusOpen}
+        isPriorityOpen={isPriorityOpen}
+        setIsPriorityOpen={setIsPriorityOpen}
         statusRef={statusRef}
         priorityRef={priorityRef}
       />
@@ -349,17 +339,13 @@ function Tasks() {
 {/* ===== Task Form ===== */}
         <TaskForm
           taskTitle={taskTitle}
-          setTaskTitle={
-            setTaskTitle
-          }
+          setTaskTitle={setTaskTitle}
           priority={priority}
-          setPriority={
-            setPriority
-          }
+          setPriority={setPriority}
           setError={setError}
-          handleSubmit={
-            handleSubmit
-          }
+          handleSubmit={handleSubmit}
+          dueDate={dueDate}
+          setDueDate={setDueDate}
         />
 
 {/* ===== Error Message ===== */}
@@ -374,32 +360,16 @@ function Tasks() {
         )}
 {/* ===== Task List ===== */}
         <TaskList
-          filteredTasks={
-            filteredTasks
-          }
-          searchTerm={
-            searchTerm
-          }
+          filteredTasks={filteredTasks}
+          searchTerm={searchTerm}
           filter={filter}
-          editingTaskId={
-            editingTaskId
-          }
+          editingTaskId={editingTaskId}
           editValue={editValue}
-          setEditValue={
-            setEditValue
-          }
-          handleSaveTask={
-            handleSaveTask
-          }
-          handleEditTask={
-            handleEditTask
-          }
-          handleDeleteTask={
-            handleDeleteTask
-          }
-          handleToggleTask={
-            handleToggleTask
-          }
+          setEditValue={setEditValue}
+          handleSaveTask={handleSaveTask}
+          handleEditTask={handleEditTask}
+          handleDeleteTask={handleDeleteTask}
+          handleToggleTask={handleToggleTask}
         />
       </div>
 

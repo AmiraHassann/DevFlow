@@ -10,13 +10,16 @@ function TaskForm({
   priority,
   setPriority,
 
+  dueDate,
+  setDueDate,
+
   setError,
 
   handleSubmit,
 }) {
   return (
     <div className={styles.form}>
-        
+      
 {/* ===== Task Input ===== */}
       <Input
         placeholder="Enter task title"
@@ -30,6 +33,15 @@ function TaskForm({
             handleSubmit();
           }
         }}
+      />
+      
+{/* ===== Due Date Input ===== */}
+      <Input
+        type="date"
+        value={dueDate}
+        onChange={(e) =>
+          setDueDate(e.target.value)
+        }
       />
 
 {/* ====== Priority Selector ====== */}

@@ -37,109 +37,142 @@ function TaskList({
         </div>
       ) : (
         <div className={styles.taskList}>
-          {filteredTasks.map((task) => (
-            <div
-              key={task.id}
-              className={styles.taskCard}
-            >
+          {filteredTasks.map((task) => {
+            const isOverdue =
+              task.dueDate &&
+              !task.completed &&
+              new Date(task.dueDate) <
+                new Date();
+
+            return (
+              <div
+                key={task.id}
+                className={styles.taskCard}
+              >
 {/* ===== Task Info ===== */}
-        <div className={styles.taskInfo}>
-            <button
-                className={`${styles.checkButton} ${
-                    task.completed
-                      ? styles.checkButtonActive
-                      : ""
-                  }`}
-                  onClick={() =>
-                    handleToggleTask(task.id)
-                  }
-                >
-                  {task.completed && (
-                    <Check
-                      size={16}
-                      strokeWidth={3}
-                    />
-                  )}
-                </button>
-
-                {editingTaskId === task.id ? (
-                  <Input
-                    value={editValue}
-                    onChange={(e) =>
-                      setEditValue(
-                        e.target.value
-                      )
+                <div className={styles.taskInfo}>
+                  <button
+                    className={`${styles.checkButton} ${
+                      task.completed
+                        ? styles.checkButtonActive
+                        : ""
+                    }`}
+                    onClick={() =>
+                      handleToggleTask(task.id)
                     }
-                    onKeyDown={(e) => {
-                      if (
-                        e.key === "Enter"
-                      ) {
-                        handleSaveTask();
-                      }
-                    }}
-                    onBlur={handleSaveTask}
-                  />
-                ) : (
-                  <>
-                    <span
-                      className={
-                        task.completed
-                          ? styles.completedTask
-                          : ""
-                      }
-                    >
-                      {task.title}
-                    </span>
-
-                    <div
-                      className={`${styles.priorityBadge} ${
-                        styles[
-                          task.priority
-                        ]
-                      }`}
-                    >
-                      {task.priority}
-                    </div>
-                  </>
-                )}
-              </div>
-
-{/* ===== Actions ===== */}
-        <div className={styles.actions}>
-            {editingTaskId !== task.id && (
-                  <>
-                <button
-                      className={
-                        styles.actionButton
-                      }
-                      onClick={() =>
-                        handleEditTask(task)
-                      }
-                    >
-                      <Pencil
-                        size={22}
+                  >
+                    {task.completed && (
+                      <Check
+                        size={16}
                         strokeWidth={3}
                       />
-                    </button>
+                    )}
+                  </button>
 
-                    <button
-                      className={`${styles.actionButton} ${styles.deleteAction}`}
-                      onClick={() =>
-                        handleDeleteTask(
-                          task.id
+                  {editingTaskId === task.id ? (
+                    <Input
+                      value={editValue}
+                      onChange={(e) =>
+                        setEditValue(
+                          e.target.value
                         )
                       }
-                    >
-                      <Trash2
-                        size={22}
-                        strokeWidth={3}
-                      />
-                    </button>
-                  </>
-                )}
+                      onKeyDown={(e) => {
+                        if (
+                          e.key === "Enter"
+                        ) {
+                          handleSaveTask();
+                        }
+                      }}
+                      onBlur={handleSaveTask}
+                    />
+                  ) : (
+                    <>
+{/* ===== Task Content ===== */}
+                      <div
+                        className={
+                          styles.taskMeta
+                        }
+                      >
+                        <span
+                          className={
+                            task.completed
+                              ? styles.completedTask
+                              : ""
+                          }
+                        >
+                          {task.title}
+                        </span>
+
+                        {task.dueDate && (
+                          <span
+                            className={`${styles.dueDate} ${
+                              isOverdue
+                                ? styles.overdueDate
+                                : ""
+                            }`}
+                          >
+                            📅 {task.dueDate}
+                          </span>
+                        )}
+                      </div>
+
+{/* ===== Priority Badge ===== */}
+                      <div
+                        className={`${styles.priorityBadge} ${
+                          styles[
+                            task.priority
+                          ]
+                        }`}
+                      >
+                        {task.priority}
+                      </div>
+                    </>
+                  )}
+                </div>
+
+{/* ===== Actions ===== */}
+                <div
+                  className={styles.actions}
+                >
+                  {editingTaskId !==
+                    task.id && (
+                    <>
+                      <button
+                        className={
+                          styles.actionButton
+                        }
+                        onClick={() =>
+                          handleEditTask(
+                            task
+                          )
+                        }
+                      >
+                        <Pencil
+                          size={22}
+                          strokeWidth={3}
+                        />
+                      </button>
+
+                      <button
+                        className={`${styles.actionButton} ${styles.deleteAction}`}
+                        onClick={() =>
+                          handleDeleteTask(
+                            task.id
+                          )
+                        }
+                      >
+                        <Trash2
+                          size={22}
+                          strokeWidth={3}
+                        />
+                      </button>
+                    </>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </>
