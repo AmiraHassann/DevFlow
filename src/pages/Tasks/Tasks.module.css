@@ -173,7 +173,7 @@
 
   border-radius: 14px;
 
-  background: #ffffff;
+  background: #fff;
 
   color: var(--color-text);
 
@@ -189,6 +189,47 @@
 
   box-shadow:
     0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.react-datepicker {
+  border: none !important;
+
+  border-radius: 18px !important;
+
+  overflow: hidden;
+
+  margin-top: 8px;
+
+  box-shadow:
+    0 12px 32px rgba(15, 23, 42, 0.12) !important;
+}
+
+.react-datepicker__header {
+  background: white !important;
+
+  border-bottom: 1px solid #eef2f7 !important;
+}
+
+.react-datepicker__current-month {
+  color: var(--color-text) !important;
+
+  font-weight: 700 !important;
+}
+
+.react-datepicker__day--selected {
+  background: var(--color-primary) !important;
+
+  border-radius: 10px !important;
+}
+
+.react-datepicker__day:hover {
+  border-radius: 10px !important;
+
+  background: #eef2ff !important;
+}
+
+.react-datepicker__triangle {
+  display: none !important;
 }
 
 .dropdown {
@@ -273,8 +314,7 @@
   border-color: var(--color-primary);
 
   box-shadow:
-    0 0 0 3px
-    rgba(79, 70, 229, 0.15);
+    0 0 0 3px rgba(79, 70, 229, 0.15);
 }
 
 .activeOption {
@@ -298,7 +338,7 @@
 }
 
 .errorMessage {
-  color: #dc2626 !important; 
+  color: #dc2626 !important;
 
   background: #fef2f2;
 

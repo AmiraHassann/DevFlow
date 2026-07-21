@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 import Input from "../../../components/ui/Input/Input";
 import Button from "../../../components/ui/Button/Button";
 
@@ -49,13 +52,33 @@ function TaskForm({
         <div className={styles.formGroup}>
           <label>Due Date</label>
 
-          <input
-            type="date"
-            value={dueDate}
-            onChange={(e) =>
-              setDueDate(e.target.value)
+          <DatePicker
+            selected={
+              dueDate ? new Date(dueDate) : null
             }
+
+            onChange={(date) =>
+              setDueDate(
+                date
+                  ? date
+                    .toISOString()
+                    .split("T")[0]
+                  : ""
+              )
+            }
+
+            placeholderText="Select due date"
             className={styles.dateInput}
+            dateFormat="dd/MM/yyyy"
+
+            popperModifiers={[
+              {
+                name: "offset",
+                options: {
+                  offset: [0, 10],
+                },
+              },
+            ]}
           />
         </div>
 
@@ -93,8 +116,8 @@ function TaskForm({
                     key={item}
                     type="button"
                     className={`${styles.dropdownItem} ${item === priority
-                        ? styles.activeOption
-                        : ""
+                      ? styles.activeOption
+                      : ""
                       }`}
                     onClick={() => {
                       setPriority(item);
