@@ -24,16 +24,16 @@ function TaskList({
 }) {
   return (
     <>
-{/* ===== Empty State ===== */}
+      {/* ===== Empty State ===== */}
       {filteredTasks.length === 0 ? (
         <div className={styles.emptyState}>
           {searchTerm
             ? "No matching tasks found."
             : filter === "completed"
-            ? "No completed tasks found."
-            : filter === "pending"
-            ? "No pending tasks found."
-            : "No tasks available yet."}
+              ? "No completed tasks found."
+              : filter === "pending"
+                ? "No pending tasks found."
+                : "No tasks available yet."}
         </div>
       ) : (
         <div className={styles.taskList}>
@@ -42,21 +42,20 @@ function TaskList({
               task.dueDate &&
               !task.completed &&
               new Date(task.dueDate) <
-                new Date();
+              new Date();
 
             return (
               <div
                 key={task.id}
                 className={styles.taskCard}
               >
-{/* ===== Task Info ===== */}
+                {/* ===== Task Info ===== */}
                 <div className={styles.taskInfo}>
                   <button
-                    className={`${styles.checkButton} ${
-                      task.completed
+                    className={`${styles.checkButton} ${task.completed
                         ? styles.checkButtonActive
                         : ""
-                    }`}
+                      }`}
                     onClick={() =>
                       handleToggleTask(task.id)
                     }
@@ -88,7 +87,7 @@ function TaskList({
                     />
                   ) : (
                     <>
-{/* ===== Task Content ===== */}
+                      {/* ===== Task Content ===== */}
                       <div
                         className={
                           styles.taskMeta
@@ -106,24 +105,29 @@ function TaskList({
 
                         {task.dueDate && (
                           <span
-                            className={`${styles.dueDate} ${
-                              isOverdue
+                            className={`${styles.dueDate} ${isOverdue
                                 ? styles.overdueDate
                                 : ""
-                            }`}
+                              }`}
                           >
-                            📅 {task.dueDate}
+                            📅{" "}
+                            {new Date(
+                              task.dueDate
+                            ).toLocaleDateString("en-GB", {
+                              day: "numeric",
+                              month: "short",
+                              year: "numeric",
+                            })}
                           </span>
                         )}
                       </div>
 
-{/* ===== Priority Badge ===== */}
+                      {/* ===== Priority Badge ===== */}
                       <div
-                        className={`${styles.priorityBadge} ${
-                          styles[
-                            task.priority
+                        className={`${styles.priorityBadge} ${styles[
+                          task.priority
                           ]
-                        }`}
+                          }`}
                       >
                         {task.priority}
                       </div>
@@ -131,44 +135,44 @@ function TaskList({
                   )}
                 </div>
 
-{/* ===== Actions ===== */}
+                {/* ===== Actions ===== */}
                 <div
                   className={styles.actions}
                 >
                   {editingTaskId !==
                     task.id && (
-                    <>
-                      <button
-                        className={
-                          styles.actionButton
-                        }
-                        onClick={() =>
-                          handleEditTask(
-                            task
-                          )
-                        }
-                      >
-                        <Pencil
-                          size={22}
-                          strokeWidth={3}
-                        />
-                      </button>
+                      <>
+                        <button
+                          className={
+                            styles.actionButton
+                          }
+                          onClick={() =>
+                            handleEditTask(
+                              task
+                            )
+                          }
+                        >
+                          <Pencil
+                            size={22}
+                            strokeWidth={3}
+                          />
+                        </button>
 
-                      <button
-                        className={`${styles.actionButton} ${styles.deleteAction}`}
-                        onClick={() =>
-                          handleDeleteTask(
-                            task.id
-                          )
-                        }
-                      >
-                        <Trash2
-                          size={22}
-                          strokeWidth={3}
-                        />
-                      </button>
-                    </>
-                  )}
+                        <button
+                          className={`${styles.actionButton} ${styles.deleteAction}`}
+                          onClick={() =>
+                            handleDeleteTask(
+                              task.id
+                            )
+                          }
+                        >
+                          <Trash2
+                            size={22}
+                            strokeWidth={3}
+                          />
+                        </button>
+                      </>
+                    )}
                 </div>
               </div>
             );

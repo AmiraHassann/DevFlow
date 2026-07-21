@@ -1,10 +1,12 @@
 .tasks {
   flex: 1;
-
   padding: 32px;
-
   background-color: var(--color-background);
 }
+
+/* =========================
+   Header
+========================= */
 
 .header {
   display: flex;
@@ -29,6 +31,35 @@
   font-size: 0.95rem;
 }
 
+.createTaskButton {
+  border: none;
+
+  background: var(--color-primary);
+
+  color: white;
+
+  padding: 12px 20px;
+
+  border-radius: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.createTaskButton:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 24px rgba(79, 70, 229, 0.2);
+}
+
+/* =========================
+   Stats
+========================= */
+
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -39,18 +70,18 @@
 }
 
 .statCard {
-  background: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
 
   padding: 20px;
 
   border-radius: 16px;
 
+  background: var(--color-surface);
+
   box-shadow: var(--shadow-sm);
-
-  display: flex;
-  flex-direction: column;
-
-  gap: 8px;
 
   transition: all 0.2s ease;
 }
@@ -68,39 +99,290 @@
 }
 
 .statCard strong {
-  font-size: 1.5rem;
-
   color: var(--color-text);
+
+  font-size: 1.5rem;
 }
 
+/* =========================
+   Content
+========================= */
+
 .content {
-  background-color: var(--color-surface);
+  min-height: 300px;
 
   padding: 32px;
 
   border-radius: var(--radius-lg);
 
-  box-shadow: var(--shadow-md);
+  background-color: var(--color-surface);
 
-  min-height: 300px;
+  box-shadow: var(--shadow-md);
 }
 
-.form {
+/* =========================
+   Task Form
+========================= */
+
+.taskFormCard {
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+
+  padding: 0;
+
+  background: transparent;
+
+  border: none;
+
+  box-shadow: none;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.formGroup label {
+  color: #64748b;
+
+  font-size: 0.85rem;
+
+  font-weight: 600;
+}
+
+.formGrid {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 16px;
+}
+
+.dateInput {
+  width: 100%;
+
+  height: 50px;
+
+  padding: 0 16px;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 14px;
+
+  background: #ffffff;
+
+  color: var(--color-text);
+
+  font-size: 0.95rem;
+
+  transition: all 0.2s ease;
+}
+
+.dateInput:focus {
+  outline: none;
+
+  border-color: var(--color-primary);
+
+  box-shadow:
+    0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.dropdownMenu {
+  position: absolute;
+
+  top: 58px;
+
+  left: 0;
+
+  right: 0;
+
+  background: white;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 12px;
+
+  overflow: hidden;
+
+  z-index: 99999;
+
+  box-shadow:
+    0 12px 24px rgba(15, 23, 42, 0.12);
+}
+
+.dropdownItem {
+  display: block;
+
+  width: 100%;
+
+  padding: 12px 16px;
+
+  border: none;
+
+  background: white;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  font-size: 0.95rem;
+}
+
+.dropdownItem:hover {
+  background: #f3f4f6;
+}
+
+.dropdownButton {
+  width: 100%;
+
+  height: 50px;
+
+  padding: 0 16px;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 14px;
+
+  background: white;
+
+  cursor: pointer;
+
+  text-align: left;
+
+  font-size: 0.95rem;
+
+  transition: all 0.2s ease;
+}
+
+.dropdownButton:hover {
+  border-color: var(--color-primary);
+}
+
+.dropdownButton:focus {
+  outline: none;
+
+  border-color: var(--color-primary);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(79, 70, 229, 0.15);
+}
+
+.activeOption {
+  background: #eef2ff;
+
+  color: var(--color-primary);
+
+  font-weight: 600;
+}
+
+.formActions {
   display: flex;
 
-  gap: 12px;
+  justify-content: flex-end;
 
-  margin-bottom: 24px;
+  margin-top: 8px;
+}
+
+.formActions button {
+  min-width: 180px;
 }
 
 .errorMessage {
-  margin-bottom: 20px;
+  color: #dc2626 !important; 
 
-  color: var(--color-danger);
+  background: #fef2f2;
+
+  border: 1px solid #fecaca;
+
+  padding: 10px 12px;
+
+  border-radius: 10px;
 
   font-size: 0.9rem;
-  font-weight: 500;
+
+  font-weight: 600;
 }
+
+/* =========================
+   Priority
+========================= */
+
+.prioritySelector {
+  display: flex;
+
+  width: 100%;
+
+  padding: 4px;
+
+  border-radius: 14px;
+
+  background: #f3f4f6;
+
+  gap: 4px;
+}
+
+.priorityOption {
+  flex: 1;
+
+  min-height: 44px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  font-weight: 600;
+
+  transition: all 0.2s ease;
+}
+
+.priorityOption:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.highActive {
+  background: white;
+
+  color: #ef4444;
+
+  box-shadow:
+    0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+.mediumActive {
+  background: white;
+
+  color: #f59e0b;
+
+  box-shadow:
+    0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+.lowActive {
+  background: white;
+
+  color: #22c55e;
+
+  box-shadow:
+    0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+/* =========================
+   Empty State
+========================= */
 
 .emptyState {
   display: flex;
@@ -114,6 +396,10 @@
   font-size: 1rem;
   font-weight: 500;
 }
+
+/* =========================
+   Task List
+========================= */
 
 .taskList {
   display: flex;
@@ -129,11 +415,10 @@
 
   padding: 18px;
 
-  background-color: var(--color-surface);
-
   border: 1px solid #eef2f7;
-
   border-radius: 16px;
+
+  background-color: var(--color-surface);
 
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
 
@@ -163,9 +448,16 @@
 }
 
 .completedTask {
-  text-decoration: line-through;
-
   color: #9ca3af;
+
+  text-decoration: line-through;
+}
+
+.taskMeta {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
 }
 
 .checkButton {
@@ -173,7 +465,6 @@
   height: 24px;
 
   border: 2px solid #d1d5db;
-
   border-radius: 50%;
 
   background: transparent;
@@ -203,6 +494,52 @@
   color: white;
 }
 
+.dueDate {
+  color: #64748b;
+
+  font-size: 0.8rem;
+}
+
+.overdueDate {
+  color: #ef4444;
+
+  font-weight: 600;
+}
+
+.priorityBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  font-size: 0.75rem;
+  font-weight: 600;
+
+  text-transform: capitalize;
+}
+
+.high {
+  background: rgba(239, 68, 68, 0.12);
+  color: #ef4444;
+}
+
+.medium {
+  background: rgba(245, 158, 11, 0.12);
+  color: #f59e0b;
+}
+
+.low {
+  background: rgba(34, 197, 94, 0.12);
+  color: #22c55e;
+}
+
+/* =========================
+   Actions
+========================= */
+
 .actions {
   display: flex;
   align-items: center;
@@ -223,14 +560,13 @@
   height: 32px;
 
   border: none;
+  border-radius: 8px;
 
   background: transparent;
 
   display: flex;
   align-items: center;
   justify-content: center;
-
-  border-radius: 8px;
 
   color: #9ca3af;
 
@@ -255,106 +591,61 @@
   color: #dc2626;
 }
 
+/* =========================
+   Toolbar
+========================= */
+
 .toolbar {
-  background: var(--color-surface);
-
   padding: 20px;
-
-  border-radius: 20px;
 
   margin-bottom: 24px;
 
-  box-shadow: 0 8px 24px
-    rgba(15, 23, 42, 0.06);
+  border-radius: 20px;
+
+  background: var(--color-surface);
+
+  box-shadow:
+    0 8px 24px rgba(15, 23, 42, 0.06);
 }
 
 .toolbarFilters {
   display: flex;
+  flex-wrap: wrap;
 
   gap: 12px;
 
-  flex-wrap: wrap;
-
   margin-top: 16px;
-}
-
-.toolbarSelect {
-  border: 1px solid #e5e7eb;
-
-  background: white;
-
-  color: #374151;
-
-  padding: 10px 14px;
-
-  border-radius: 12px;
-
-  min-width: 160px;
-
-  font-size: 0.9rem;
-
-  font-weight: 500;
-
-  cursor: pointer;
-
-  transition: all 0.2s ease;
-}
-
-.toolbarSelect:hover {
-  border-color: var(--color-primary);
-}
-
-.toolbarSelect:focus {
-  outline: none;
-
-  border-color: var(--color-primary);
-
-  box-shadow: 0 0 0 4px
-    rgba(79, 70, 229, 0.1);
 }
 
 .filterCard {
   position: relative;
 
-  background: #f8fafc;
-
-  border: 1px solid #e5e7eb;
-
-  border-radius: 14px;
+  min-width: 160px;
 
   padding: 12px 16px;
 
-  min-width: 160px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
 
-  transition: all 0.2s ease;
+  background: #f8fafc;
 
   cursor: pointer;
+
+  transition: all 0.2s ease;
 }
 
 .filterCard:hover {
-  border-color: var(--color-primary);
-
   transform: translateY(-2px);
 
-  box-shadow: 0 8px 20px
-    rgba(15, 23, 42, 0.08);
-}
+  border-color: var(--color-primary);
 
-.filterCard span {
-  display: block;
-
-  margin-bottom: 6px;
-
-  font-size: 0.75rem;
-
-  color: #94a3b8;
+  box-shadow:
+    0 8px 20px rgba(15, 23, 42, 0.08);
 }
 
 .filterCardButton {
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
 
   gap: 8px;
@@ -373,60 +664,45 @@
 .filterCardActive {
   border-color: var(--color-primary);
 
-  box-shadow: 0 0 0 4px
-    rgba(79, 70, 229, 0.1);
+  box-shadow:
+    0 0 0 4px rgba(79, 70, 229, 0.1);
 }
 
 .popover {
   position: absolute;
 
   top: calc(100% + 8px);
-
   left: 0;
 
   width: 100%;
 
-  background: white;
-
   border: 1px solid #e5e7eb;
-
   border-radius: 12px;
 
-  box-shadow: 0 12px 24px
-    rgba(15, 23, 42, 0.08);
+  background: white;
 
   overflow: hidden;
 
   z-index: 100;
-  
-  animation: fadeIn 0.15s ease;
-  }
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-4px);
-    }
 
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+  animation: fadeIn 0.15s ease;
+
+  box-shadow:
+    0 12px 24px rgba(15, 23, 42, 0.08);
+}
 
 .popover button {
   width: 100%;
+
+  padding: 10px 12px;
 
   border: none;
 
   background: white;
 
-  padding: 10px 12px;
-
   text-align: left;
 
   cursor: pointer;
-
-  transition: 0.2s ease;
 }
 
 .popover button:hover {
@@ -441,135 +717,21 @@
   transform: rotate(180deg);
 }
 
-.priorityBadge {
-  display: inline-flex;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
 
-  align-items: center;
-  justify-content: center;
-
-  padding: 6px 12px;
-
-  border-radius: 999px;
-
-  font-size: 0.75rem;
-
-  font-weight: 600;
-
-  text-transform: capitalize;
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.high {
-  background: rgba(239, 68, 68, 0.12);
-
-  color: #ef4444;
-}
-
-.medium {
-  background: rgba(245, 158, 11, 0.12);
-
-  color: #f59e0b;
-}
-
-.low {
-  background: rgba(34, 197, 94, 0.12);
-
-  color: #22c55e;
-}
-
-.prioritySelector {
-  display: flex;
-  gap: 8px;
-}
-
-.priorityOption {
-  border: none;
-
-  padding: 10px 14px;
-
-  border-radius: 10px;
-
-  cursor: pointer;
-
-  background: #f3f4f6;
-
-  font-weight: 600;
-}
-
-.highActive {
-  background: rgba(239, 68, 68, 0.12);
-
-  color: #ef4444;
-}
-
-.mediumActive {
-  background: rgba(245, 158, 11, 0.12);
-
-  color: #f59e0b;
-}
-
-.lowActive {
-  background: rgba(34, 197, 94, 0.12);
-
-  color: #22c55e;
-}
-
-.priorityFilters {
-  display: flex;
-
-  gap: 10px;
-
-  margin-bottom: 24px;
-}
-
-.priorityFilterButton {
-  border: none;
-
-  padding: 10px 16px;
-
-  border-radius: 10px;
-
-  background: #f3f4f6;
-
-  color: #64748b;
-
-  cursor: pointer;
-
-  font-weight: 600;
-
-  transition: all 0.2s ease;
-}
-
-.priorityFilterButton:hover {
-  background: #e5e7eb;
-}
-
-.activePriorityFilter {
-  background: var(--color-primary);
-
-  color: white;
-}
-
-.searchContainer {
-  margin-bottom: 24px;
-
-  max-width: 400px;
-}
-
-.taskMeta {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.dueDate {
-  font-size: 0.8rem;
-  color: #64748b;
-}
-
-.overdueDate {
-  color: #ef4444;
-  font-weight: 600;
-}
+/* =========================
+   Responsive
+========================= */
 
 @media (max-width: 768px) {
   .tasks {
@@ -592,8 +754,12 @@
     padding: 24px;
   }
 
-  .form {
-    flex-direction: column;
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .formActions button {
+    width: 100%;
   }
 
   .taskCard {

@@ -19,11 +19,14 @@ function Tasks() {
     useState("");
 
   const [priority, setPriority] =
-    useState("medium");
+    useState("");
 
   const [dueDate, setDueDate] =
     useState("");
-  
+
+  const [isCreateTaskOpen, setIsCreateTaskOpen] =
+    useState(false);
+
   const [error, setError] =
     useState("");
 
@@ -207,10 +210,10 @@ function Tasks() {
       (task) =>
         task.id === taskId
           ? {
-              ...task,
-              completed:
-                !task.completed,
-            }
+            ...task,
+            completed:
+              !task.completed,
+          }
           : task
     );
 
@@ -234,9 +237,9 @@ function Tasks() {
       (task) =>
         task.id === editingTaskId
           ? {
-              ...task,
-              title: editValue,
-            }
+            ...task,
+            title: editValue,
+          }
           : task
     );
 
@@ -271,8 +274,8 @@ function Tasks() {
         filter === "completed"
           ? task.completed
           : filter === "pending"
-          ? !task.completed
-          : true;
+            ? !task.completed
+            : true;
 
       const matchesSearch =
         task.title
@@ -285,7 +288,7 @@ function Tasks() {
         priorityFilter === "all"
           ? true
           : task.priority ===
-            priorityFilter;
+          priorityFilter;
 
       return (
         matchesStatus &&
@@ -298,26 +301,35 @@ function Tasks() {
   return (
     <main className={styles.tasks}>
 
-{/* ===== Header ===== */}
+      {/* ===== Header ===== */}
       <div className={styles.header}>
         <div>
           <h1>Tasks</h1>
 
           <p>
-            Manage and organize your
-            daily tasks.
+            Manage and organize your daily
+            tasks.
           </p>
         </div>
+
+        <button
+          className={styles.createTaskButton}
+          onClick={() =>
+            setIsCreateTaskOpen(true)
+          }
+        >
+          + Create New Task
+        </button>
       </div>
 
-{/* ===== Stats ===== */}
+      {/* ===== Stats ===== */}
       <TaskStats
         totalTasks={totalTasks}
         completedTasks={completedTasks}
         pendingTasks={pendingTasks}
       />
 
-{/* ===== Toolbar ===== */}
+      {/* ===== Toolbar ===== */}
       <TaskToolbar
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
@@ -333,32 +345,10 @@ function Tasks() {
         priorityRef={priorityRef}
       />
 
-{/* ===== Content ===== */}
+      {/* ===== Content ===== */}
       <div className={styles.content}>
 
-{/* ===== Task Form ===== */}
-        <TaskForm
-          taskTitle={taskTitle}
-          setTaskTitle={setTaskTitle}
-          priority={priority}
-          setPriority={setPriority}
-          setError={setError}
-          handleSubmit={handleSubmit}
-          dueDate={dueDate}
-          setDueDate={setDueDate}
-        />
-
-{/* ===== Error Message ===== */}
-        {error && (
-          <p
-            className={
-              styles.errorMessage
-            }
-          >
-            {error}
-          </p>
-        )}
-{/* ===== Task List ===== */}
+        {/* ===== Task List ===== */}
         <TaskList
           filteredTasks={filteredTasks}
           searchTerm={searchTerm}
@@ -372,8 +362,38 @@ function Tasks() {
           handleToggleTask={handleToggleTask}
         />
       </div>
+      {/* ===== Task Form ===== */}
+      {isCreateTaskOpen && (
+        <Modal
+          onClose={() =>
+            setIsCreateTaskOpen(false)
+          }
+        >
+          <TaskForm
+            taskTitle={taskTitle}
+            setTaskTitle={setTaskTitle}
+            priority={priority}
+            setPriority={setPriority}
+            dueDate={dueDate}
+            setDueDate={setDueDate}
+            error={error}
+            setError={setError}
+            handleSubmit={() => {
+              if (!taskTitle.trim()) {
+                setError(
+                  "Please enter a task first."
+                );
+                return;
+              }
 
-{/* ===== Delete Modal ===== */}
+              handleSubmit();
+              setIsCreateTaskOpen(false);
+            }}
+          />
+        </Modal>
+      )}
+
+      {/* ===== Delete Modal ===== */}
       {isModalOpen && (
         <Modal
           title="Delete Task"

@@ -21,11 +21,11 @@
   transform: translate(-50%, -50%);
 
   width: 90%;
-  max-width: 420px;
+  max-width: 600px;
 
   background: var(--color-surface);
 
-  padding: 24px;
+  padding: 32px;
 
   border-radius: 20px;
 
