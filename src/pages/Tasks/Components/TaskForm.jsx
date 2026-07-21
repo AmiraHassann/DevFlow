@@ -74,9 +74,9 @@ function TaskForm({
             >
               {priority
                 ? priority
-                    .charAt(0)
-                    .toUpperCase() +
-                  priority.slice(1)
+                  .charAt(0)
+                  .toUpperCase() +
+                priority.slice(1)
                 : "Choose Priority"}
             </button>
 
@@ -92,11 +92,10 @@ function TaskForm({
                   <button
                     key={item}
                     type="button"
-                    className={`${styles.dropdownItem} ${
-                      item === priority
+                    className={`${styles.dropdownItem} ${item === priority
                         ? styles.activeOption
                         : ""
-                    }`}
+                      }`}
                     onClick={() => {
                       setPriority(item);
                       setIsPriorityOpen(

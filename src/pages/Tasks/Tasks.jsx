@@ -57,11 +57,11 @@ function Tasks() {
      Edit State
   ========================= */
 
-  const [editingTaskId, setEditingTaskId] =
-    useState(null);
+  const [isEditTaskOpen, setIsEditTaskOpen] =
+    useState(false);
 
-  const [editValue, setEditValue] =
-    useState("");
+  const [editingTask, setEditingTask] =
+    useState(null);
 
   /* =========================
      Modal State
@@ -225,29 +225,43 @@ function Tasks() {
   ========================= */
 
   const handleEditTask = (task) => {
-    setEditingTaskId(task.id);
+    setEditingTask(task);
 
-    setEditValue(task.title);
+    setTaskTitle(task.title);
+
+    setPriority(task.priority);
+
+    setDueDate(task.dueDate);
+
+    setIsEditTaskOpen(true);
   };
 
-  const handleSaveTask = () => {
-    if (!editValue.trim()) return;
+  const handleUpdateTask = () => {
+    if (!taskTitle.trim()) return;
 
     const updatedTasks = tasks.map(
       (task) =>
-        task.id === editingTaskId
+        task.id === editingTask.id
           ? {
             ...task,
-            title: editValue,
+            title: taskTitle,
+            priority,
+            dueDate,
           }
           : task
     );
 
     setTasks(updatedTasks);
 
-    setEditingTaskId(null);
+    setEditingTask(null);
 
-    setEditValue("");
+    setIsEditTaskOpen(false);
+
+    setTaskTitle("");
+
+    setPriority("");
+
+    setDueDate("");
   };
 
   /* =========================
@@ -353,10 +367,6 @@ function Tasks() {
           filteredTasks={filteredTasks}
           searchTerm={searchTerm}
           filter={filter}
-          editingTaskId={editingTaskId}
-          editValue={editValue}
-          setEditValue={setEditValue}
-          handleSaveTask={handleSaveTask}
           handleEditTask={handleEditTask}
           handleDeleteTask={handleDeleteTask}
           handleToggleTask={handleToggleTask}
@@ -389,6 +399,28 @@ function Tasks() {
               handleSubmit();
               setIsCreateTaskOpen(false);
             }}
+          />
+        </Modal>
+      )}
+
+      {/* ===== Edit Task Modal ===== */}
+      {isEditTaskOpen && (
+        <Modal
+          onClose={() => {
+            setIsEditTaskOpen(false);
+            setEditingTask(null);
+          }}
+        >
+          <TaskForm
+            taskTitle={taskTitle}
+            setTaskTitle={setTaskTitle}
+            priority={priority}
+            setPriority={setPriority}
+            dueDate={dueDate}
+            setDueDate={setDueDate}
+            error={error}
+            setError={setError}
+            handleSubmit={handleUpdateTask}
           />
         </Modal>
       )}

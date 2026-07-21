@@ -4,8 +4,6 @@ import {
   Trash2,
 } from "lucide-react";
 
-import Input from "../../../components/ui/Input/Input";
-
 import styles from "../Tasks.module.css";
 
 function TaskList({
@@ -13,11 +11,6 @@ function TaskList({
   searchTerm,
   filter,
 
-  editingTaskId,
-  editValue,
-  setEditValue,
-
-  handleSaveTask,
   handleEditTask,
   handleDeleteTask,
   handleToggleTask,
@@ -68,111 +61,78 @@ function TaskList({
                     )}
                   </button>
 
-                  {editingTaskId === task.id ? (
-                    <Input
-                      value={editValue}
-                      onChange={(e) =>
-                        setEditValue(
-                          e.target.value
-                        )
+                  {/* ===== Task Content ===== */}
+                  <div
+                    className={styles.taskMeta}
+                  >
+                    <span
+                      className={
+                        task.completed
+                          ? styles.completedTask
+                          : ""
                       }
-                      onKeyDown={(e) => {
-                        if (
-                          e.key === "Enter"
-                        ) {
-                          handleSaveTask();
-                        }
-                      }}
-                      onBlur={handleSaveTask}
-                    />
-                  ) : (
-                    <>
-                      {/* ===== Task Content ===== */}
-                      <div
-                        className={
-                          styles.taskMeta
-                        }
-                      >
-                        <span
-                          className={
-                            task.completed
-                              ? styles.completedTask
-                              : ""
-                          }
-                        >
-                          {task.title}
-                        </span>
+                    >
+                      {task.title}
+                    </span>
 
-                        {task.dueDate && (
-                          <span
-                            className={`${styles.dueDate} ${isOverdue
-                                ? styles.overdueDate
-                                : ""
-                              }`}
-                          >
-                            📅{" "}
-                            {new Date(
-                              task.dueDate
-                            ).toLocaleDateString("en-GB", {
-                              day: "numeric",
-                              month: "short",
-                              year: "numeric",
-                            })}
-                          </span>
-                        )}
-                      </div>
-
-                      {/* ===== Priority Badge ===== */}
-                      <div
-                        className={`${styles.priorityBadge} ${styles[
-                          task.priority
-                          ]
+                    {task.dueDate && (
+                      <span
+                        className={`${styles.dueDate} ${isOverdue
+                            ? styles.overdueDate
+                            : ""
                           }`}
                       >
-                        {task.priority}
-                      </div>
-                    </>
-                  )}
+                        📅{" "}
+                        {new Date(
+                          task.dueDate
+                        ).toLocaleDateString(
+                          "en-GB",
+                          {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric",
+                          }
+                        )}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* ===== Priority Badge ===== */}
+                  <div
+                    className={`${styles.priorityBadge} ${styles[task.priority]
+                      }`}
+                  >
+                    {task.priority}
+                  </div>
                 </div>
 
                 {/* ===== Actions ===== */}
-                <div
-                  className={styles.actions}
-                >
-                  {editingTaskId !==
-                    task.id && (
-                      <>
-                        <button
-                          className={
-                            styles.actionButton
-                          }
-                          onClick={() =>
-                            handleEditTask(
-                              task
-                            )
-                          }
-                        >
-                          <Pencil
-                            size={22}
-                            strokeWidth={3}
-                          />
-                        </button>
+                <div className={styles.actions}>
+                  <button
+                    className={
+                      styles.actionButton
+                    }
+                    onClick={() =>
+                      handleEditTask(task)
+                    }
+                  >
+                    <Pencil
+                      size={22}
+                      strokeWidth={3}
+                    />
+                  </button>
 
-                        <button
-                          className={`${styles.actionButton} ${styles.deleteAction}`}
-                          onClick={() =>
-                            handleDeleteTask(
-                              task.id
-                            )
-                          }
-                        >
-                          <Trash2
-                            size={22}
-                            strokeWidth={3}
-                          />
-                        </button>
-                      </>
-                    )}
+                  <button
+                    className={`${styles.actionButton} ${styles.deleteAction}`}
+                    onClick={() =>
+                      handleDeleteTask(task.id)
+                    }
+                  >
+                    <Trash2
+                      size={22}
+                      strokeWidth={3}
+                    />
+                  </button>
                 </div>
               </div>
             );
