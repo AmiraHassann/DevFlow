@@ -3,16 +3,14 @@ import { useState, useEffect, useRef } from "react";
 import {
   Check,
   Pencil,
-  Trash2,
-  ChevronDown,
-  ListFilter,
-  Flag
+  Trash2
 } from "lucide-react";
 
 import styles from "./Tasks.module.css";
+import TaskToolbar from "./components/TaskToolbar";
+import TaskStats from "./components/TaskStats";
+import TaskForm from "./components/TaskForm";
 
-import Button from "../../components/ui/Button/Button";
-import Input from "../../components/ui/Input/Input";
 import Modal from "../../components/ui/Modal/Modal";
 
 function Tasks() {
@@ -218,222 +216,39 @@ function Tasks() {
           </p>
         </div>
       </div>
-
-      <div className={styles.stats}>
-        <div className={styles.statCard}>
-          <span>Total</span>
-          <strong>{totalTasks}</strong>
-        </div>
-
-        <div className={styles.statCard}>
-          <span>Completed</span>
-          <strong>{completedTasks}</strong>
-        </div>
-
-        <div className={styles.statCard}>
-          <span>Pending</span>
-          <strong>{pendingTasks}</strong>
-        </div>
-      </div>
-
-      <div className={styles.toolbar}>
-        <Input
-          placeholder="Search tasks..."
-          value={searchTerm}
-          onChange={(e) =>
-            setSearchTerm(e.target.value)
-          }
-        />
-
-  <div className={styles.toolbarFilters}>
-    <div
-    ref={statusRef}
-    className={`${styles.filterCard} ${
-    isStatusOpen
-      ? styles.filterCardActive
-      : ""
-  }`}
-    >
-  <button
-    className={styles.filterCardButton}
-    onClick={() =>
-      setIsStatusOpen(!isStatusOpen)
-    }
-  ><ListFilter size={16} />
-    { filter === "all"
-        ? "Status"
-        : filter.charAt(0).toUpperCase() +
-          filter.slice(1)}
-     <ChevronDown 
-        size={16}   
-        className={
-        isStatusOpen
-          ? styles.chevronOpen
-          : styles.chevron
-        }
-/>
-  </button>
-
-  {isStatusOpen && (
-    <div className={styles.popover}>
-      <button
-        onClick={() => {
-          setFilter("all");
-          setIsStatusOpen(false);
-        }}
-      >
-        All
-      </button>
-
-      <button
-        onClick={() => {
-          setFilter("completed");
-          setIsStatusOpen(false);
-        }}
-      >
-        Completed
-      </button>
-
-      <button
-        onClick={() => {
-          setFilter("pending");
-          setIsStatusOpen(false);
-        }}
-      >
-        Pending
-      </button>
-    </div>
-  )}
-</div>
-   <div
-   ref={priorityRef}
-   className={`${styles.filterCard} ${
-    isPriorityOpen
-      ? styles.filterCardActive
-      : ""
-  }`}
-   >
-  <button
-    className={styles.filterCardButton}
-    onClick={() =>
-      setIsPriorityOpen(!isPriorityOpen)
-    }
-  ><Flag size={16} />
-    {
-      priorityFilter === "all"
-        ? "Priority"
-        : priorityFilter.charAt(0).toUpperCase() +
-          priorityFilter.slice(1)
-    }<ChevronDown size={16}
-     className={
-      isPriorityOpen
-        ? styles.chevronOpen
-        : styles.chevron
-  }
- />
-  </button>
-
-  {isPriorityOpen && (
-    <div className={styles.popover}>
-      <button
-        onClick={() => {
-          setPriorityFilter("all");
-          setIsPriorityOpen(false);
-        }}
-      >
-        All
-      </button>
-
-      <button
-        onClick={() => {
-          setPriorityFilter("high");
-          setIsPriorityOpen(false);
-        }}
-      >
-        High
-      </button>
-
-      <button
-        onClick={() => {
-          setPriorityFilter("medium");
-          setIsPriorityOpen(false);
-        }}
-      >
-        Medium
-      </button>
-
-      <button
-        onClick={() => {
-          setPriorityFilter("low");
-          setIsPriorityOpen(false);
-        }}
-      >
-        Low
-      </button>
-    </div>
-  )}
-</div>
-  </div>
-</div>
+{/* ============= Stats ============ */}
+      <TaskStats
+        totalTasks={totalTasks}
+        completedTasks={completedTasks}
+        pendingTasks={pendingTasks}
+      />
+{/* ============= Toolbar ============ */}
+      <TaskToolbar
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        filter={filter}
+        setFilter={setFilter}
+        priorityFilter={priorityFilter}
+        setPriorityFilter={setPriorityFilter}
+        isStatusOpen={isStatusOpen}
+        setIsStatusOpen={setIsStatusOpen}
+        isPriorityOpen={isPriorityOpen}
+        setIsPriorityOpen={setIsPriorityOpen}
+        statusRef={statusRef}
+        priorityRef={priorityRef}
+      />
 
       <div className={styles.content}>
-        <div className={styles.form}>
-          <Input
-          placeholder="Enter task title"
-          value={taskTitle}
-          onChange={(e) => {
-            setTaskTitle(e.target.value);
-            setError("");
-          }}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              handleSubmit();
-            }
-          }}
-          />
-          <div className={styles.prioritySelector}>
-          <button
-            type="button"
-            className={`${styles.priorityOption} ${
-              priority === "high"
-                ? styles.highActive
-                : ""
-            }`}
-            onClick={() => setPriority("high")}
-          >
-            High
-          </button>
-
-          <button
-            type="button"
-            className={`${styles.priorityOption} ${
-              priority === "medium"
-                ? styles.mediumActive
-                : ""
-            }`}
-            onClick={() => setPriority("medium")}
-          >
-            Medium
-          </button>
-
-          <button
-            type="button"
-            className={`${styles.priorityOption} ${
-              priority === "low"
-                ? styles.lowActive
-                : ""
-            }`}
-            onClick={() => setPriority("low")}
-          >
-            Low
-          </button>
-        </div>
-      
-          <Button onClick={handleSubmit}>
-            Add Task
-          </Button>
-        </div>
-
+{/* ===== Task Form ===== */}
+      <TaskForm
+        taskTitle={taskTitle}
+        setTaskTitle={setTaskTitle}
+        priority={priority}
+        setPriority={setPriority}
+        setError={setError}
+        handleSubmit={handleSubmit}
+      />
+{/* ===== Task List ===== */}
         {error && (
           <p className={styles.errorMessage}>
             {error}
