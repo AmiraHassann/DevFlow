@@ -1,0 +1,81 @@
+.settings {
+  flex: 1;
+
+  padding: 32px;
+
+  background: var(--color-background);
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.header h1 {
+  margin-bottom: 8px;
+
+  color: var(--color-text);
+
+  font-size: 2rem;
+
+  font-weight: 700;
+}
+
+.header p {
+  color: #6b7280;
+}
+
+.card {
+  padding: 32px;
+
+  border-radius: 20px;
+
+  background: var(--color-surface);
+
+  box-shadow: var(--shadow-md);
+}
+
+.card h2 {
+  margin-bottom: 24px;
+
+  color: var(--color-text);
+}
+
+.formGroup {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  margin-bottom: 20px;
+}
+
+.formGroup label {
+  color: #64748b;
+
+  font-size: 0.9rem;
+
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .settings {
+    padding: 20px;
+  }
+
+  .card {
+    padding: 24px;
+  }
+
+  .actions button {
+    width: 100%;
+  }
+}
