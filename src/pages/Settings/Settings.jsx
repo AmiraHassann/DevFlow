@@ -6,16 +6,16 @@ import LanguageSection from "./components/LanguageSection";
 import DataSection from "./components/DataSection";
 import AboutSection from "./components/AboutSection";
 
+import { auth } from "../../firebase/config";
+
 import styles from "./Settings.module.css";
 
 function Settings() {
   /* =========================
-     Profile Settings State
+     Current User
   ========================= */
 
-  const [name, setName] = useState("");
-
-  const [email, setEmail] = useState("");
+  const user = auth.currentUser;
 
   /* =========================
      Appearance State
@@ -37,24 +37,27 @@ function Settings() {
     );
 
   /* =========================
-     Load Saved Data
+     Tasks & Notes Statistics
   ========================= */
 
-  useEffect(() => {
-    const savedName =
-      localStorage.getItem("userName");
+  const tasks =
+    JSON.parse(
+      localStorage.getItem("tasks")
+    ) || [];
 
-    const savedEmail =
-      localStorage.getItem("userEmail");
+  const notes =
+    JSON.parse(
+      localStorage.getItem("notes")
+    ) || [];
 
-    if (savedName) {
-      setName(savedName);
-    }
+  const totalTasks = tasks.length;
 
-    if (savedEmail) {
-      setEmail(savedEmail);
-    }
-  }, []);
+  const completedTasks =
+    tasks.filter(
+      (task) => task.completed
+    ).length;
+
+  const totalNotes = notes.length;
 
   /* =========================
      Save Theme
@@ -79,24 +82,6 @@ function Settings() {
   }, [language]);
 
   /* =========================
-     Save Settings
-  ========================= */
-
-  const handleSaveChanges = () => {
-    localStorage.setItem(
-      "userName",
-      name
-    );
-
-    localStorage.setItem(
-      "userEmail",
-      email
-    );
-
-    alert("Settings saved successfully.");
-  };
-
-  /* =========================
      Data Management
   ========================= */
 
@@ -114,7 +99,6 @@ function Settings() {
 
   return (
     <main className={styles.settings}>
-      {/* ===== Header ===== */}
       <div className={styles.header}>
         <h1>Settings</h1>
 
@@ -124,32 +108,26 @@ function Settings() {
         </p>
       </div>
 
-      {/* ===== Sections ===== */}
       <div className={styles.sections}>
-        {/* Profile */}
         <ProfileSection
-          name={name}
-          setName={setName}
-          email={email}
-          setEmail={setEmail}
-          handleSaveChanges={
-            handleSaveChanges
+          user={user}
+          totalTasks={totalTasks}
+          completedTasks={
+            completedTasks
           }
+          totalNotes={totalNotes}
         />
 
-        {/* Appearance */}
         <AppearanceSection
           theme={theme}
           setTheme={setTheme}
         />
 
-        {/* Language */}
         <LanguageSection
           language={language}
           setLanguage={setLanguage}
         />
 
-        {/* Data Management */}
         <DataSection
           handleClearTasks={
             handleClearTasks
@@ -162,7 +140,6 @@ function Settings() {
           }
         />
 
-        {/* About */}
         <AboutSection />
       </div>
     </main>

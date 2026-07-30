@@ -1,71 +1,78 @@
-import Input from "../../../components/ui/Input/Input";
-import Button from "../../../components/ui/Button/Button";
-
 import styles from "../Settings.module.css";
 
 function ProfileSection({
-  name,
-  setName,
-  email,
-  setEmail,
-  handleSaveChanges,
+  user,
+  totalTasks,
+  completedTasks,
+  totalNotes,
 }) {
+  const initials =
+  user?.displayName
+    ?.split(" ")
+    .map((word) => word[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase() || "U";
+
   return (
     <div className={styles.card}>
-      <div className={styles.profileHeader}>
+      <div className={styles.profileCard}>
         <div className={styles.avatar}>
-          {name
-            ? name
-                .split(" ")
-                .map(
-                  (word) => word[0]
-                )
-                .join("")
-                .slice(0, 2)
-                .toUpperCase()
-            : "U"}
+          {initials}
         </div>
 
-        <div>
-          <h2>Profile Settings</h2>
+        <h2 className={styles.profileName}>
+          {user?.displayName ||
+            "DevFlow User"}
+        </h2>
 
-          <p>
-            Manage your personal
-            information.
-          </p>
+        <p className={styles.profileEmail}>
+          {user?.email}
+        </p>
+
+        <div className={styles.divider} />
+
+        <div className={styles.stats}>
+          <div className={styles.statItem}>
+            <span>📋 Total Tasks</span>
+
+            <strong>
+              {totalTasks}
+            </strong>
+          </div>
+
+          <div className={styles.statItem}>
+            <span>
+              ✅ Completed Tasks
+            </span>
+
+            <strong>
+              {completedTasks}
+            </strong>
+          </div>
+
+          <div className={styles.statItem}>
+            <span>📝 Total Notes</span>
+
+            <strong>
+              {totalNotes}
+            </strong>
+          </div>
         </div>
-      </div>
 
-      <div className={styles.formGroup}>
-        <label>Full Name</label>
+        <div className={styles.divider} />
 
-        <Input
-          placeholder="Enter your name"
-          value={name}
-          onChange={(e) =>
-            setName(e.target.value)
-          }
-        />
-      </div>
-
-      <div className={styles.formGroup}>
-        <label>Email Address</label>
-
-        <Input
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) =>
-            setEmail(e.target.value)
-          }
-        />
-      </div>
-
-      <div className={styles.actions}>
-        <Button
-          onClick={handleSaveChanges}
+        <div
+          className={styles.accountStatus}
         >
-          Save Changes
-        </Button>
+          <span>
+            Account Status
+          </span>
+
+          <strong>
+            Authenticated ✅
+          </strong>
+        </div>
       </div>
     </div>
   );

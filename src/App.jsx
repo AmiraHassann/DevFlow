@@ -10,6 +10,8 @@ import {
 import Topbar from "./components/layouts/Topbar/Topbar";
 import Sidebar from "./components/layouts/Sidebar/Sidebar";
 
+import ProtectedRoute from "./components/ProtectedRoute";
+
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 
@@ -59,22 +61,38 @@ function App() {
 
               <Route
                 path="/dashboard"
-                element={<DashboardPage />}
+                element={
+                  <ProtectedRoute>
+                    <DashboardPage />
+                  </ProtectedRoute>
+                }
               />
 
               <Route
                 path="/tasks"
-                element={<Tasks />}
+                element={
+                  <ProtectedRoute>
+                    <Tasks />
+                  </ProtectedRoute>
+                }
               />
 
               <Route
                 path="/notes"
-                element={<Notes />}
+                element={
+                  <ProtectedRoute>
+                    <Notes />
+                  </ProtectedRoute>
+                }
               />
 
               <Route
                 path="/settings"
-                element={<Settings />}
+                element={
+                  <ProtectedRoute>
+                    <Settings />
+                  </ProtectedRoute>
+                }
               />
             </Routes>
           </div>
