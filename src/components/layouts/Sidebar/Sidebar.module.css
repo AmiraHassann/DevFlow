@@ -4,7 +4,7 @@
 
   background-color: var(--color-surface);
 
-  border-right: 1px solid #e5e7eb;
+  border-right: 1px solid var(--color-border);
 
   padding: 24px;
 }
@@ -66,7 +66,7 @@
 }
 
 .navItem:hover {
-  background-color: #f3f4f6;
+  background-color: var(--color-hover);
 
   color: var(--color-primary);
 }
@@ -192,7 +192,9 @@
 
   border-radius: 20px;
 
-  background: white;
+  background: var(--color-surface);
+
+color: var(--color-text);
 
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
@@ -204,7 +206,9 @@
 .modal p {
   margin-bottom: 24px;
 
-  color: #64748b;
+  color: var(--color-text);
+
+  opacity: 0.8;
 }
 
 .modalActions {
@@ -218,11 +222,13 @@
 .cancelButton {
   padding: 10px 16px;
 
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--color-border);
 
   border-radius: 10px;
 
-  background: white;
+  background: var(--color-surface);
+
+  color: var(--color-text);
 
   cursor: pointer;
 }

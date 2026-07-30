@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 
 import ProfileSection from "./components/ProfileSection";
 import AppearanceSection from "./components/AppearanceSection";
-import LanguageSection from "./components/LanguageSection";
+import PreferencesSection from "./components/PreferencesSection";
 import DataSection from "./components/DataSection";
 import AboutSection from "./components/AboutSection";
 
-import { auth } from "../../firebase/config";
+import { useAuth } from "../../context/AuthContext";
 
 import styles from "./Settings.module.css";
 
@@ -15,7 +15,8 @@ function Settings() {
      Current User
   ========================= */
 
-  const user = auth.currentUser;
+  const { user, setUser } =
+    useAuth();
 
   /* =========================
      Appearance State
@@ -27,14 +28,26 @@ function Settings() {
   );
 
   /* =========================
-     Language State
+     Preference State
   ========================= */
 
-  const [language, setLanguage] =
+  const [startPage, setStartPage] =
     useState(
-      localStorage.getItem("language") ||
-        "en"
+      localStorage.getItem(
+        "startPage"
+      ) || "dashboard"
     );
+
+  /* =========================
+     Save Page Preference
+  ========================= */
+
+  useEffect(() => {
+    localStorage.setItem(
+      "startPage",
+      startPage
+    );
+  }, [startPage]);
 
   /* =========================
      Tasks & Notes Statistics
@@ -64,22 +77,16 @@ function Settings() {
   ========================= */
 
   useEffect(() => {
+    document.documentElement.setAttribute(
+      "data-theme",
+      theme
+    );
+
     localStorage.setItem(
       "theme",
       theme
     );
   }, [theme]);
-
-  /* =========================
-     Save Language
-  ========================= */
-
-  useEffect(() => {
-    localStorage.setItem(
-      "language",
-      language
-    );
-  }, [language]);
 
   /* =========================
      Data Management
@@ -111,6 +118,7 @@ function Settings() {
       <div className={styles.sections}>
         <ProfileSection
           user={user}
+          setUser={setUser}
           totalTasks={totalTasks}
           completedTasks={
             completedTasks
@@ -123,9 +131,9 @@ function Settings() {
           setTheme={setTheme}
         />
 
-        <LanguageSection
-          language={language}
-          setLanguage={setLanguage}
+        <PreferencesSection
+          startPage={startPage}
+          setStartPage={setStartPage}
         />
 
         <DataSection

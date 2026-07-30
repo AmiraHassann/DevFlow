@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Routes,
@@ -30,6 +30,21 @@ function App() {
     location.pathname === "/login" ||
     location.pathname === "/register";
 
+  const startPage =
+    localStorage.getItem("startPage") ||
+    "dashboard";
+
+  useEffect(() => {
+    const savedTheme =
+      localStorage.getItem("theme") ||
+      "light";
+
+    document.documentElement.setAttribute(
+      "data-theme",
+      savedTheme
+    );
+  }, []);
+
   return (
     <>
       {!isAuthPage && (
@@ -53,7 +68,7 @@ function App() {
                 path="/"
                 element={
                   <Navigate
-                    to="/login"
+                    to={`/${startPage}`}
                     replace
                   />
                 }

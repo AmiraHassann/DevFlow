@@ -54,6 +54,7 @@ function Login() {
         icon: "warning",
         title: "Please fill in all fields",
       });
+
       return;
     }
 
@@ -71,8 +72,13 @@ function Login() {
         title: "Welcome Back 👋",
       });
 
+      const startPage =
+        localStorage.getItem(
+          "startPage"
+        ) || "dashboard";
+
       setTimeout(() => {
-        navigate("/dashboard");
+        navigate(`/${startPage}`);
       }, 1200);
     } catch (error) {
       switch (error.code) {
@@ -124,6 +130,7 @@ function Login() {
           title:
             "Please enter your email first",
         });
+
         return;
       }
 
@@ -170,6 +177,7 @@ function Login() {
       <div className={styles.authCard}>
         <div className={styles.authHeader}>
           <h1>DevFlow</h1>
+
           <p>Welcome back</p>
         </div>
 
@@ -242,6 +250,7 @@ function Login() {
                 )
               }
             />
+
             Remember Me
           </label>
 

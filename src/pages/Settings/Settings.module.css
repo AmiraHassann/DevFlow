@@ -48,6 +48,26 @@
    Profile Section
 ========================= */
 
+.profileTop {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 20px;
+
+  margin-bottom: 24px;
+}
+
+.profileInfo {
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+}
+
 .profileCard {
   text-align: center;
 }
@@ -79,9 +99,19 @@
 
   font-size: 1.4rem;
   font-weight: 700;
+
+  margin: 0 0 6px;
+
+  color: var(--color-text);
+
+  font-size: 1.4rem;
+
+  font-weight: 700;
 }
 
 .profileEmail {
+  margin: 0;
+
   color: #64748b;
 }
 
@@ -129,6 +159,60 @@
 }
 
 /* =========================
+   Edit Profile Section
+========================= */
+
+.editProfileButton {
+  margin-top: 16px;
+
+  padding: 10px 16px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: var(--color-primary);
+
+  color: white;
+
+  cursor: pointer;
+
+  font-weight: 600;
+}
+
+.editProfileButton:hover {
+  opacity: 0.9;
+}
+
+.formGroup {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  margin: 20px 0;
+}
+
+.formGroup label {
+  color: var(--color-text);
+
+  font-weight: 600;
+}
+
+.formGroup input {
+  padding: 12px 14px;
+
+  border: 1px solid var(--color-border);
+
+  border-radius: 12px;
+
+  background: var(--color-surface);
+
+  color: var(--color-text);
+}
+
+/* =========================
    Card Header
 ========================= */
 
@@ -151,7 +235,7 @@
 }
 
 /* =========================
-   Appearance & Language
+   Appearance 
 ========================= */
 
 .themeOptions {
@@ -187,13 +271,210 @@
 }
 
 /* =========================
-   Data Management
+   Preferences
 ========================= */
 
-.dataActions {
+.preferenceGroup {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.preferenceGroup label {
+  color: var(--color-text);
+
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.startPageGrid {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
   gap: 12px;
+}
+
+.pageCard {
+  padding: 18px;
+
+  border: 1px solid var(--color-border);
+
+  border-radius: 16px;
+
+  background: var(--color-surface);
+
+  color: var(--color-text);
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.pageCard:hover {
+  border-color: var(--color-primary);
+
+  transform: translateY(-2px);
+}
+
+.selectedCard {
+  border-color: var(--color-primary);
+
+  background: rgba(99, 102, 241, 0.08);
+}
+
+.cardIcon {
+  font-size: 1.4rem;
+}
+
+/* =========================
+   Data & Storage
+========================= */
+
+.dataCards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dataCard {
+  padding: 20px;
+
+  border: 1px solid var(--color-border);
+
+  border-radius: 16px;
+
+  background: var(--color-surface);
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.dataCard:hover {
+  border-color: var(--color-primary);
+
+  transform: translateY(-2px);
+}
+
+.dataCard h3 {
+  margin-bottom: 8px;
+
+  color: var(--color-text);
+
+  font-size: 1rem;
+}
+
+.dataCard p {
+  color: #64748b;
+
+  font-size: 0.9rem;
+}
+
+.dangerCard {
+  border-color: rgba(239,
+      68,
+      68,
+      0.25);
+}
+
+.dangerCard:hover {
+  border-color: #ef4444;
+}
+
+/* =========================
+   Modal
+========================= */
+
+.modalOverlay {
+  position: fixed;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.5);
+
+  z-index: 9999;
+}
+
+.modal {
+  width: 100%;
+  max-width: 420px;
+
+  padding: 24px;
+
+  border-radius: 20px;
+
+  background: var(--color-surface);
+
+  color: var(--color-text);
+
+  box-shadow: var(--shadow-md);
+}
+
+.modal h3 {
+  margin-bottom: 12px;
+}
+
+.modal p {
+  margin-bottom: 24px;
+
+  line-height: 1.6;
+
+  color: var(--color-text);
+
+  opacity: 0.8;
+}
+
+.modalActions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 12px;
+}
+
+.cancelButton {
+  padding: 10px 16px;
+
+  border: 1px solid var(--color-border);
+
+  border-radius: 10px;
+
+  background: var(--color-surface);
+
+  color: var(--color-text);
+
+  cursor: pointer;
+}
+
+.confirmButton {
+  padding: 10px 16px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: var(--color-danger);
+
+  color: white;
+
+  cursor: pointer;
 }
 
 /* =========================
@@ -248,4 +529,18 @@
   .dataActions button {
     width: 100%;
   }
+
+  .startPageGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .profileTop {
+  flex-direction: column;
+
+  align-items: flex-start;
+}
+
+.editProfileButton {
+  width: 100%;
+}
 }
