@@ -1,17 +1,40 @@
 import { useEffect, useState } from "react";
 
-import Input from "../../components/ui/Input/Input";
-import Button from "../../components/ui/Button/Button";
+import ProfileSection from "./components/ProfileSection";
+import AppearanceSection from "./components/AppearanceSection";
+import LanguageSection from "./components/LanguageSection";
+import DataSection from "./components/DataSection";
+import AboutSection from "./components/AboutSection";
 
 import styles from "./Settings.module.css";
 
 function Settings() {
   /* =========================
-     Profile Settings
+     Profile Settings State
   ========================= */
 
   const [name, setName] = useState("");
+
   const [email, setEmail] = useState("");
+
+  /* =========================
+     Appearance State
+  ========================= */
+
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") ||
+      "light"
+  );
+
+  /* =========================
+     Language State
+  ========================= */
+
+  const [language, setLanguage] =
+    useState(
+      localStorage.getItem("language") ||
+        "en"
+    );
 
   /* =========================
      Load Saved Data
@@ -34,6 +57,28 @@ function Settings() {
   }, []);
 
   /* =========================
+     Save Theme
+  ========================= */
+
+  useEffect(() => {
+    localStorage.setItem(
+      "theme",
+      theme
+    );
+  }, [theme]);
+
+  /* =========================
+     Save Language
+  ========================= */
+
+  useEffect(() => {
+    localStorage.setItem(
+      "language",
+      language
+    );
+  }, [language]);
+
+  /* =========================
      Save Settings
   ========================= */
 
@@ -51,9 +96,25 @@ function Settings() {
     alert("Settings saved successfully.");
   };
 
+  /* =========================
+     Data Management
+  ========================= */
+
+  const handleClearTasks = () => {
+    localStorage.removeItem("tasks");
+  };
+
+  const handleClearNotes = () => {
+    localStorage.removeItem("notes");
+  };
+
+  const handleResetData = () => {
+    localStorage.clear();
+  };
+
   return (
     <main className={styles.settings}>
-      {/* Header */}
+      {/* ===== Header ===== */}
       <div className={styles.header}>
         <h1>Settings</h1>
 
@@ -63,41 +124,46 @@ function Settings() {
         </p>
       </div>
 
-      {/* Profile Card */}
-      <div className={styles.card}>
-        <h2>Profile Settings</h2>
+      {/* ===== Sections ===== */}
+      <div className={styles.sections}>
+        {/* Profile */}
+        <ProfileSection
+          name={name}
+          setName={setName}
+          email={email}
+          setEmail={setEmail}
+          handleSaveChanges={
+            handleSaveChanges
+          }
+        />
 
-        <div className={styles.formGroup}>
-          <label>Full Name</label>
+        {/* Appearance */}
+        <AppearanceSection
+          theme={theme}
+          setTheme={setTheme}
+        />
 
-          <Input
-            placeholder="Enter your name"
-            value={name}
-            onChange={(e) =>
-              setName(e.target.value)
-            }
-          />
-        </div>
+        {/* Language */}
+        <LanguageSection
+          language={language}
+          setLanguage={setLanguage}
+        />
 
-        <div className={styles.formGroup}>
-          <label>Email Address</label>
+        {/* Data Management */}
+        <DataSection
+          handleClearTasks={
+            handleClearTasks
+          }
+          handleClearNotes={
+            handleClearNotes
+          }
+          handleResetData={
+            handleResetData
+          }
+        />
 
-          <Input
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) =>
-              setEmail(e.target.value)
-            }
-          />
-        </div>
-
-        <div className={styles.actions}>
-          <Button
-            onClick={handleSaveChanges}
-          >
-            Save Changes
-          </Button>
-        </div>
+        {/* About */}
+        <AboutSection />
       </div>
     </main>
   );
