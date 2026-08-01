@@ -317,10 +317,21 @@ function Notes() {
     setIsModalOpen(true);
   };
 
+  useEffect(() => {
+    localStorage.setItem("trashedNotes", JSON.stringify(trashedNotes));
+  }, [trashedNotes]);
+
   return (
     <main className={styles.notes}>
       <div className={styles.header}>
-        <h1>Notes</h1>
+       <div>
+    <h1>Notes</h1>
+
+    <p>
+      Manage and organize your daily
+      notes.
+    </p>
+  </div>
 
         <div className={styles.headerActions}>
           <button

@@ -28,20 +28,26 @@ function ContinueWorking({
                 {latestTask.title}
               </h3>
 
-              <p>
-                {latestTask.description ||
-                  "No description available"}
-              </p>
+<span
+    className={`${styles.priorityBadge} ${
+      styles[latestTask.priority]
+    }`}
+  >
+    Priority: {latestTask.priority}
+  </span>
 
               <div
                 className={
                   styles.workMeta
                 }
               >
-                <span>
-                  Status:{" "}
-                  {latestTask.status}
-                </span>
+  <div className={styles.workMeta}>
+  <span>
+    {latestTask.completed
+      ? "✅ Completed"
+      : "🟡 Pending"}
+  </span>
+</div>
               </div>
             </>
           ) : (

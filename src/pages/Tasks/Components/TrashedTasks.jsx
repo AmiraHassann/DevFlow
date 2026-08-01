@@ -1,7 +1,7 @@
-import styles from "../Notes.module.css";
+import styles from "../Tasks.module.css";
 
-function TrashModal({
-  trashedNotes,
+function TrashedTasks({
+  trashedTasks,
   onClose,
   onRestore,
   onDeleteForever,
@@ -11,16 +11,16 @@ function TrashModal({
       <div className={styles.modal}>
         <h3>Trash Bin</h3>
 
-        {trashedNotes.length === 0 ? (
+        {trashedTasks.length === 0 ? (
           <p>Trash is empty.</p>
         ) : (
-          trashedNotes.map((note) => (
+          trashedTasks.map((task) => (
             <div
-              key={note.id}
+              key={task.id}
               className={styles.trashItem}
             >
               <strong>
-                {note.title}
+                {task.title}
               </strong>
 
               <div
@@ -33,7 +33,7 @@ function TrashModal({
                     styles.confirmButton
                   }
                   onClick={() =>
-                    onRestore(note)
+                    onRestore(task)
                   }
                 >
                   Restore
@@ -45,7 +45,7 @@ function TrashModal({
                   }
                   onClick={() =>
                     onDeleteForever(
-                      note.id
+                      task.id
                     )
                   }
                 >
@@ -69,4 +69,4 @@ function TrashModal({
   );
 }
 
-export default TrashModal;
+export default TrashedTasks;

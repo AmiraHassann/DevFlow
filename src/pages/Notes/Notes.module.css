@@ -5,7 +5,7 @@
 .notes {
     flex: 1;
 
-    padding: 24px;
+    padding: 20px;
 }
 
 .header {
@@ -21,36 +21,43 @@
 }
 
 .header h1 {
-    margin: 0;
+    margin-bottom: 8px;
 
     color: var(--color-text);
+
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.header p {
+    color: #6b7280;
+
+    font-size: 0.95rem;
 }
 
 .headerActions {
-  display: flex;
+    display: flex;
 
-  gap: 12px;
+    gap: 12px;
 }
 
 .trashButton {
-  padding: 12px 18px;
+    padding: 12px 18px;
 
-  border: none;
+    border: none;
 
-  border-radius: 12px;
+    border-radius: 12px;
 
-  background: rgba(
-    239,
-    68,
-    68,
-    0.1
-  );
+    background: rgba(239,
+            68,
+            68,
+            0.1);
 
-  color: #ef4444;
+    color: #ef4444;
 
-  font-weight: 600;
+    font-weight: 600;
 
-  cursor: pointer;
+    cursor: pointer;
 }
 
 /* =========================
@@ -135,86 +142,84 @@
 ========================= */
 
 .sortContainer {
-  position: relative;
+    position: relative;
 
-  width: 230px;
+    width: 230px;
 }
 
 .sortButton {
-  width: 100%;
+    width: 100%;
 
-  height: 54px;
+    height: 54px;
 
-  display: flex;
+    display: flex;
 
-  align-items: center;
+    align-items: center;
 
-  justify-content: space-between;
+    justify-content: space-between;
 
-  padding: 0 16px;
+    padding: 0 16px;
 
-  border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border);
 
-  border-radius: 14px;
+    border-radius: 14px;
 
-  background: var(--color-surface);
+    background: var(--color-surface);
 
-  color: var(--color-text);
+    color: var(--color-text);
 
-  font: inherit;
+    font: inherit;
 
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .sortButton:hover {
-  border-color: var(--color-primary);
+    border-color: var(--color-primary);
 }
 
 .sortMenu {
-  position: absolute;
+    position: absolute;
 
-  top: calc(100% + 8px);
+    top: calc(100% + 8px);
 
-  left: 0;
+    left: 0;
 
-  width: 100%;
+    width: 100%;
 
-  background: var(--color-surface);
+    background: var(--color-surface);
 
-  border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border);
 
-  border-radius: 14px;
+    border-radius: 14px;
 
-  overflow: hidden;
+    overflow: hidden;
 
-  box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-md);
 
-  z-index: 100;
+    z-index: 100;
 }
 
 .sortMenu button {
-  width: 100%;
+    width: 100%;
 
-  padding: 14px 16px;
+    padding: 14px 16px;
 
-  border: none;
+    border: none;
 
-  background: transparent;
+    background: transparent;
 
-  color: var(--color-text);
+    color: var(--color-text);
 
-  text-align: left;
+    text-align: left;
 
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .sortMenu button:hover {
-  background: rgba(
-    99,
-    102,
-    241,
-    0.08
-  );
+    background: rgba(99,
+            102,
+            241,
+            0.08);
 }
 
 /* =========================
@@ -445,65 +450,65 @@
 }
 
 .bulkActions {
-  display: flex;
+    display: flex;
 
-  align-items: center;
+    align-items: center;
 
-  gap: 12px;
+    gap: 12px;
 
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 
-  padding: 14px 18px;
+    padding: 14px 18px;
 
-  border-radius: 16px;
+    border-radius: 16px;
 
-  background: #eef2ff;
+    background: #eef2ff;
 
-  border: 1px solid #c7d2fe;
+    border: 1px solid #c7d2fe;
 }
 
 .bulkActions span {
-  font-weight: 600;
+    font-weight: 600;
 
-  color: #4338ca;
+    color: #4338ca;
 }
 
 .bulkActions button {
-  border: none;
+    border: none;
 
-  padding: 8px 14px;
+    padding: 8px 14px;
 
-  border-radius: 10px;
+    border-radius: 10px;
 
-  cursor: pointer;
+    cursor: pointer;
 
-  font-weight: 600;
+    font-weight: 600;
 
-  transition: 0.2s;
+    transition: 0.2s;
 
-  display: flex;
+    display: flex;
 
-  align-items: center;
+    align-items: center;
 
-  gap: 10px;
+    gap: 10px;
 }
 
 .bulkActions button:nth-child(2) {
-  background: #fef3c7;
+    background: #fef3c7;
 
-  color: #b45309;
+    color: #b45309;
 }
 
 .bulkActions button:nth-child(3) {
-  background: #fee2e2;
+    background: #fee2e2;
 
-  color: #dc2626;
+    color: #dc2626;
 }
 
 .bulkActions button:nth-child(4) {
-  background: #e5e7eb;
+    background: #e5e7eb;
 
-  color: #374151;
+    color: #374151;
 }
 
 /* =========================
@@ -550,34 +555,32 @@
 
 .modalOverlay {
     position: fixed;
-
     inset: 0;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
 
     background: rgba(0, 0, 0, 0.5);
 
-    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 1000;
 }
 
 .modal {
-    width: 100%;
+    width: min(600px, 90vw);
 
-    max-width: 550px;
+    max-height: 70vh;
 
-    padding: 24px;
+    overflow-y: auto;
+
+    background: white;
 
     border-radius: 20px;
 
-    background: var(--color-surface);
+    padding: 24px;
 
-    color: var(--color-text);
-
-    box-shadow: var(--shadow-md);
+    box-shadow:
+     0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 .modalTitle {
@@ -674,6 +677,20 @@
     color: white;
 
     font-weight: 600;
+
+    cursor: pointer;
+}
+
+.modalActions .confirmButton {
+    border: none;
+
+    padding: 10px 14px;
+
+    border-radius: 10px;
+
+    background: #22c55e;
+
+    color: white;
 
     cursor: pointer;
 }

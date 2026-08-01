@@ -44,7 +44,7 @@ function DashboardHero() {
       </p>
 
       <span className={styles.heroDate}>
-        {today}
+        📅 {today}
       </span>
     </section>
   );

@@ -6,6 +6,7 @@ import TaskToolbar from "./components/TaskToolbar";
 import TaskStats from "./components/TaskStats";
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
+import TrashedTasks from "./components/TrashedTasks";
 
 import Modal from "../../components/ui/Modal/Modal";
 
@@ -73,6 +74,9 @@ function Tasks() {
   const [selectedTaskId, setSelectedTaskId] =
     useState(null);
 
+  const [showTrash, setShowTrash] =
+    useState(false);
+
   /* =========================
      Refs
   ========================= */
@@ -94,6 +98,17 @@ function Tasks() {
       : [];
   });
 
+  const [trashedTasks, setTrashedTasks] =
+    useState(() => {
+      return (
+        JSON.parse(
+          localStorage.getItem(
+            "trashedTasks"
+          )
+        ) || []
+      );
+    });
+
   /* =========================
      Local Storage Effect
   ========================= */
@@ -105,6 +120,14 @@ function Tasks() {
     );
   }, [tasks]);
 
+  useEffect(() => {
+    localStorage.setItem(
+      "trashedTasks",
+      JSON.stringify(
+        trashedTasks
+      )
+    );
+  }, [trashedTasks]);
   /* =========================
      Close Popovers
   ========================= */
@@ -161,6 +184,11 @@ function Tasks() {
       completed: false,
       priority,
       dueDate,
+
+      createdAt:
+        new Date().toLocaleString(),
+
+      updatedAt: null,
     };
 
     setTasks([...tasks, newTask]);
@@ -187,16 +215,58 @@ function Tasks() {
   };
 
   const confirmDeleteTask = () => {
-    const updatedTasks = tasks.filter(
-      (task) =>
-        task.id !== selectedTaskId
-    );
+    const taskToTrash =
+      tasks.find(
+        (task) =>
+          task.id === selectedTaskId
+      );
 
-    setTasks(updatedTasks);
+    if (taskToTrash) {
+      setTrashedTasks(
+        (prev) => [
+          taskToTrash,
+          ...prev,
+        ]
+      );
+    }
+
+    setTasks(
+      tasks.filter(
+        (task) =>
+          task.id !== selectedTaskId
+      )
+    );
 
     setSelectedTaskId(null);
 
     setIsModalOpen(false);
+  };
+
+  const handleRestoreTask = (
+    task
+  ) => {
+    setTasks((prev) => [
+      task,
+      ...prev,
+    ]);
+
+    setTrashedTasks((prev) =>
+      prev.filter(
+        (item) =>
+          item.id !== task.id
+      )
+    );
+  };
+
+  const handleDeleteForever = (
+    id
+  ) => {
+    setTrashedTasks((prev) =>
+      prev.filter(
+        (task) =>
+          task.id !== id
+      )
+    );
   };
 
   /* =========================
@@ -247,7 +317,11 @@ function Tasks() {
             title: taskTitle,
             priority,
             dueDate,
+
+            updatedAt:
+              new Date().toLocaleString(),
           }
+
           : task
     );
 
@@ -326,15 +400,33 @@ function Tasks() {
           </p>
         </div>
 
-        <button
-          className={styles.createTaskButton}
-          onClick={() =>
-            setIsCreateTaskOpen(true)
-          }
-        >
-          + Create New Task
-        </button>
+        <div className={styles.headerActions}>
+          <button
+            className={styles.trashButton}
+            onClick={() =>
+              setShowTrash(true)
+            }
+          >
+            🗑️ Trash
+
+            {trashedTasks.length > 0 && (
+              <span className={styles.trashCount}>
+                {trashedTasks.length}
+              </span>
+            )}
+          </button>
+
+          <button
+            className={styles.createTaskButton}
+            onClick={() =>
+              setIsCreateTaskOpen(true)
+            }
+          >
+            + New Task
+          </button>
+        </div>
       </div>
+
 
       {/* ===== Stats ===== */}
       <TaskStats
@@ -439,6 +531,19 @@ function Tasks() {
               null
             );
           }}
+        />
+      )}
+
+      {showTrash && (
+        <TrashedTasks
+          trashedTasks={trashedTasks}
+          onRestore={handleRestoreTask}
+          onDeleteForever={
+            handleDeleteForever
+          }
+          onClose={() =>
+            setShowTrash(false)
+          }
         />
       )}
     </main>

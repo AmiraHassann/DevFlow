@@ -175,6 +175,29 @@
   font-weight: 500;
 
   color: #4f46e5;
+  margin-top: 12px;
+}
+
+.priorityBadge {
+  padding: 10px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.high {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.medium {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.low {
+  background: #dcfce7;
+  color: #16a34a;
 }
 
 /* =========================
@@ -245,12 +268,6 @@
 
   transition: 0.3s ease;
 }
-
-/* =========================
-   ActiveTasks
-========================= */
-
-
 
 /* =========================
    HighPriorityTasks

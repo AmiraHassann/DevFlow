@@ -55,11 +55,10 @@ function DashboardPage() {
     tasks.length;
 
   const completedTasks =
-    tasks.filter(
-      (task) =>
-        task.status ===
-        "completed"
-    ).length;
+  tasks.filter(
+    (task) => task.completed
+  ).length;
+
 
   return (
     <main className={styles.dashboard}>
@@ -91,40 +90,25 @@ function DashboardPage() {
         />
 
         {/* =========================
-            Active Tasks
-        ========================= */}
-
-        {/* <ActiveTasks /> */}
-
-        {/* =========================
             High Priority Tasks
         ========================= */}
-
-        {/* <HighPriorityTasks /> */}
 
         {/* =========================
             Task Status Chart
         ========================= */}
 
-        {/* <TaskStatusChart /> */}
-
         {/* =========================
             Productivity Chart
         ========================= */}
-
-        {/* <ProductivityChart /> */}
 
         {/* =========================
             Recent Activity
         ========================= */}
 
-        {/* <RecentActivity /> */}
-
         {/* =========================
             Quick Actions
         ========================= */}
 
-        {/* <QuickActions /> */}
       </div>
     </main>
   );
