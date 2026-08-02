@@ -14,7 +14,6 @@ import TrashedTasks from "./components/TrashedTasks";
 import Modal from "../../components/ui/Modal/Modal";
 
 function Tasks() {
-
   /* =========================
      Form State
   ========================= */
