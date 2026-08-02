@@ -44,16 +44,26 @@ function ProductivityChart({ tasks = [] }) {
       <div className={styles.chartWrapper}>
         <ResponsiveContainer
           width="100%"
-          height={320}
+          height="100%"
         >
-          <BarChart data={weekData}>
-            <CartesianGrid
-              strokeDasharray="3 3"
+          <BarChart
+            data={weekData}
+            margin={{ top: 8, right: 8, left: -12, bottom: 4 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+
+            <XAxis
+              dataKey="day"
+              tick={{ fontSize: 12 }}
+              axisLine={false}
+              tickLine={false}
             />
 
-            <XAxis dataKey="day" />
-
-            <YAxis />
+            <YAxis
+              tick={{ fontSize: 12 }}
+              axisLine={false}
+              tickLine={false}
+            />
 
             <Tooltip />
 

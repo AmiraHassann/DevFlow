@@ -14,13 +14,25 @@ body {
   font-family: Inter, sans-serif;
   background: var(--color-background);
   color: var(--color-text);
+  overflow-x: hidden;
 }
 
 button {
   font: inherit;
 }
 
+#root {
+  width: 100%;
+}
+
 .app-layout {
   display: flex;
   min-height: calc(100vh - 72px);
+}
+
+@media (max-width: 768px) {
+  .app-layout {
+    flex-direction: column;
+    min-height: auto;
+  }
 }

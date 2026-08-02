@@ -2,7 +2,7 @@ import styles from "../Dashboard.module.css";
 
 function RecentActivity({ activities = [] }) {
   const recentActivities =
-    activities.slice(0, 5);
+    activities.slice(0, 3);
 
   const getActivityIcon = (
     action

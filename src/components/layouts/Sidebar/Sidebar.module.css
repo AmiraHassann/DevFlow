@@ -257,6 +257,13 @@ color: var(--color-text);
   }
 }
 
+@media (max-width: 900px) {
+  .sidebar {
+    width: 240px;
+    padding: 20px;
+  }
+}
+
 @media (max-width: 768px) {
   .closeButton {
     display: block;
@@ -268,7 +275,7 @@ color: var(--color-text);
     top: 0;
     left: -100%;
 
-    width: 260px;
+    width: min(280px, 85vw);
     height: 100vh;
 
     z-index: 999;
@@ -278,6 +285,40 @@ color: var(--color-text);
 
   .open {
     left: 0;
+  }
+
+  .modal {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .modalActions {
+    flex-direction: column-reverse;
+  }
+
+  .cancelButton,
+  .confirmButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+    padding: 18px;
+  }
+
+  .navItem {
+    padding: 11px 12px;
+    font-size: 0.9rem;
+  }
+
+  .sectionTitle {
+    padding: 0 12px;
+  }
+
+  .closeButton {
+    margin-bottom: 16px;
   }
 }
 

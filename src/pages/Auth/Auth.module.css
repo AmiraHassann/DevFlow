@@ -250,3 +250,28 @@
 .swal2-container {
   z-index: 9999 !important;
 }
+
+@media (max-width: 480px) {
+  .authPage {
+    padding: 16px;
+  }
+
+  .authCard {
+    padding: 24px;
+    border-radius: 18px;
+  }
+
+  .authHeader h1 {
+    font-size: 1.5rem;
+  }
+
+  .loginOptions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .authButton {
+    height: 46px;
+  }
+}

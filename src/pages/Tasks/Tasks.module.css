@@ -948,21 +948,9 @@
    Responsive
 ========================= */
 
-@media (max-width: 768px) {
-  .tasks {
-    padding: 20px;
-  }
-
-  .header {
-    flex-direction: column;
-
-    align-items: flex-start;
-
-    gap: 16px;
-  }
-
+@media (max-width: 900px) {
   .stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .content {
@@ -972,22 +960,55 @@
   .formGrid {
     grid-template-columns: 1fr;
   }
+}
+
+@media (max-width: 640px) {
+  .tasks {
+    padding: 16px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .content {
+    padding: 18px;
+  }
+
+  .headerActions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .createTaskButton {
+    width: 100%;
+  }
+
+  .formActions {
+    flex-direction: column;
+  }
 
   .formActions button {
     width: 100%;
+    min-width: 100%;
   }
 
   .taskCard {
     flex-direction: column;
-
     align-items: flex-start;
-
     gap: 16px;
   }
 
   .actions {
     opacity: 1;
-
     align-self: flex-end;
+    width: 100%;
+    justify-content: flex-end;
   }
 }

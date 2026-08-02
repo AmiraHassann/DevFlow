@@ -69,36 +69,34 @@
 }
 
 @media (max-width: 768px) {
+  .topbar {
+    height: auto;
+    min-height: 72px;
+    padding: 0 16px;
+  }
+
   .menuButton {
     display: flex;
-
     align-items: center;
     justify-content: center;
   }
+
+  .userName {
+    display: none;
+  }
+
+  .logo h1 {
+    font-size: 1.2rem;
+  }
 }
 
-.leftSection {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+@media (max-width: 480px) {
+  .topbar {
+    padding: 0 12px;
+  }
 
-.menuButton {
-  display: none;
-
-  border: none;
-  background: transparent;
-
-  cursor: pointer;
-
-  color: var(--color-text);
-}
-
-@media (max-width: 768px) {
-  .menuButton {
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
+  .avatar {
+    width: 36px;
+    height: 36px;
   }
 }
