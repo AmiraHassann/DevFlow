@@ -1,6 +1,8 @@
 import DashboardHero from "./components/DashboardHero";
 import ContinueWorking from "./components/ContinueWorking";
 import ProgressOverview from "./components/ProgressOverview";
+import TaskPriorityChart from "./components/TaskPriorityChart";
+import ProductivityChart from "./components/ProductivityChart";
 
 import styles from "./Dashboard.module.css";
 
@@ -27,11 +29,11 @@ function DashboardPage() {
     (a, b) =>
       new Date(
         b.updatedAt ||
-          b.createdAt
+        b.createdAt
       ) -
       new Date(
         a.updatedAt ||
-          a.createdAt
+        a.createdAt
       )
   )[0];
 
@@ -39,11 +41,11 @@ function DashboardPage() {
     (a, b) =>
       new Date(
         b.updatedAt ||
-          b.createdAt
+        b.createdAt
       ) -
       new Date(
         a.updatedAt ||
-          a.createdAt
+        a.createdAt
       )
   )[0];
 
@@ -55,9 +57,9 @@ function DashboardPage() {
     tasks.length;
 
   const completedTasks =
-  tasks.filter(
-    (task) => task.completed
-  ).length;
+    tasks.filter(
+      (task) => task.completed
+    ).length;
 
 
   return (
@@ -94,12 +96,16 @@ function DashboardPage() {
         ========================= */}
 
         {/* =========================
-            Task Status Chart
+            Task Priority Chart
         ========================= */}
+
+        <TaskPriorityChart tasks={tasks} />
 
         {/* =========================
             Productivity Chart
         ========================= */}
+
+        <ProductivityChart tasks={tasks} />
 
         {/* =========================
             Recent Activity

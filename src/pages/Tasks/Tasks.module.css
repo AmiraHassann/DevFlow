@@ -738,17 +738,17 @@
 
 .high {
   background: rgba(239, 68, 68, 0.12);
-  color: #ef4444;
+  color: var(--color-danger);
 }
 
 .medium {
   background: rgba(245, 158, 11, 0.12);
-  color: #f59e0b;
+  color: var(--color-warning);
 }
 
 .low {
   background: rgba(34, 197, 94, 0.12);
-  color: #22c55e;
+  color: var(--color-success);
 }
 
 /* =========================
