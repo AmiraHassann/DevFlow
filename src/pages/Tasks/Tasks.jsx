@@ -5,11 +5,11 @@ import styles from "./Tasks.module.css";
 import { logActivity }
   from "../../utils/activityLogger";
 
-import TaskToolbar from "./temp/TaskToolbar";
-import TaskStats from "./temp/TaskStats";
-import TaskForm from "./temp/TaskForm";
-import TaskList from "./temp/TaskList";
-import TrashedTasks from "./temp/TrashedTasks";
+import TaskToolbar from "./components/TaskToolbar";
+import TaskStats from "./components/TaskStats";
+import TaskForm from "./components/TaskForm";
+import TaskList from "./components/TaskList";
+import TrashedTasks from "./components/TrashedTasks";
 
 import Modal from "../../components/ui/Modal/Modal";
 
