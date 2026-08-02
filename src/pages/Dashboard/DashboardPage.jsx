@@ -4,6 +4,8 @@ import ProgressOverview from "./components/ProgressOverview";
 import TaskPriorityChart from "./components/TaskPriorityChart";
 import ProductivityChart from "./components/ProductivityChart";
 import RecentActivity from "./components/RecentActivity";
+import UpcomingDeadlines from "./components/UpcomingDeadlines";
+import QuoteOfTheDay from "./components/QuoteOfTheDay";
 
 import styles from "./Dashboard.module.css";
 
@@ -98,10 +100,6 @@ function DashboardPage() {
         />
 
         {/* =========================
-            High Priority Tasks
-        ========================= */}
-
-        {/* =========================
             Task Priority Chart
         ========================= */}
 
@@ -122,8 +120,11 @@ function DashboardPage() {
         />
 
         {/* =========================
-            Quick Actions
+            Upcoming Deadlines and Quote of the Day
         ========================= */}
+
+        <UpcomingDeadlines tasks={tasks} />
+        <QuoteOfTheDay />
 
       </div>
     </main>

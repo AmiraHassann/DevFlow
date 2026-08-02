@@ -11,6 +11,7 @@ import Topbar from "./components/layouts/Topbar/Topbar";
 import Sidebar from "./components/layouts/Sidebar/Sidebar";
 
 import ProtectedRoute from "./components/ProtectedRoute";
+import ScrollToTopButton from "./components/ScrollToTopButton/ScrollToTopButton";
 
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
@@ -110,6 +111,9 @@ function App() {
                 }
               />
             </Routes>
+
+            <ScrollToTopButton />
+
           </div>
         </>
       )}

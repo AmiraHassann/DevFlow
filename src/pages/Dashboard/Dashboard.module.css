@@ -25,11 +25,9 @@
 
   border-radius: 20px;
 
-  background: linear-gradient(
-    135deg,
-    #6366f1,
-    #8b5cf6
-  );
+  background: linear-gradient(135deg,
+      #6366f1,
+      #8b5cf6);
 
   color: white;
 }
@@ -43,12 +41,10 @@
 
   border-radius: 999px;
 
-  background: rgba(
-    255,
-    255,
-    255,
-    0.15
-  );
+  background: rgba(255,
+      255,
+      255,
+      0.15);
 
   font-size: 0.75rem;
 
@@ -119,8 +115,7 @@
 
   border: 1px solid var(--color-border);
 
-  box-shadow: 0 4px 12px
-    rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 
   transition: 0.2s ease;
 }
@@ -191,7 +186,7 @@
 }
 
 .medium {
-   background: rgba(245, 158, 11, 0.12);
+  background: rgba(245, 158, 11, 0.12);
   color: var(--color-warning);
 }
 
@@ -216,8 +211,7 @@
   background:
     var(--color-surface);
 
-  border: 1px solid
-    var(--color-border);
+  border: 1px solid var(--color-border);
 }
 
 .progressInfo {
@@ -240,9 +234,7 @@
 }
 
 .progressText {
-  color: var(
-    --color-text-secondary
-  );
+  color: var(--color-text-secondary);
 }
 
 .progressBar {
@@ -260,18 +252,12 @@
 
   border-radius: 999px;
 
-  background: linear-gradient(
-    90deg,
-    var(--color-primary),
-    #8b5cf6
-  );
+  background: linear-gradient(90deg,
+      var(--color-primary),
+      #8b5cf6);
 
   transition: 0.3s ease;
 }
-
-/* =========================
-   HighPriorityTasks
-========================= */
 
 /* =========================
    Task Priority Chart
@@ -496,10 +482,173 @@
 }
 
 /* =========================
-   QuickActions
+   Upcoming Deadlines
 ========================= */
 
+.deadlinesCard {
+  margin-top: 24px;
 
+  padding: 24px;
+
+  border-radius: 20px;
+
+  background: var(--color-surface);
+
+  border: 1px solid var(--color-border);
+
+  box-shadow: var(--shadow-sm);
+}
+
+.deadlinesList {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+
+  margin-top: 16px;
+}
+
+.deadlineItem {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 14px;
+
+  border-radius: 14px;
+
+  background: var(--color-background);
+
+  border: 1px solid var(--color-border);
+}
+
+.deadlineItem h4 {
+  margin: 0 0 4px;
+}
+
+.deadlineItem p {
+  margin: 0;
+
+  color: #64748b;
+}
+
+.emptyDeadlines {
+  color: #94a3b8;
+
+  margin-top: 12px;
+}
+
+.cardSubtitle {
+  margin-top: 8px;
+
+  margin-bottom: 20px;
+
+  color: #64748b;
+
+  font-size: 0.9rem;
+}
+
+/* =========================
+   Quote Of The Day
+========================= */
+
+.quoteCard {
+  position: relative;
+
+  margin-top: 24px;
+
+  padding: 32px;
+
+  border-radius: 24px;
+
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    #818cf8
+  );
+
+  color: white;
+
+  overflow: hidden;
+
+  box-shadow: 0 12px 30px
+    rgba(99, 102, 241, 0.25);
+}
+
+.quoteCard::before {
+  content: "❝";
+
+  position: absolute;
+
+  top: -20px;
+  right: 20px;
+
+  font-size: 8rem;
+
+  opacity: 0.15;
+}
+
+.quoteCard h2 {
+  margin: 0;
+
+  color: white;
+
+  font-size: 1.3rem;
+}
+
+.quoteCard .cardSubtitle {
+  margin-top: 8px;
+
+  color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  );
+}
+
+.quoteText {
+  margin-top: 24px;
+
+  font-size: 1.2rem;
+
+  line-height: 1.8;
+
+  font-style: italic;
+
+  font-weight: 500;
+}
+
+.quoteAuthor {
+  display: block;
+
+  margin-top: 20px;
+
+  text-align: right;
+
+  color: rgba(
+    255,
+    255,
+    255,
+    0.85
+  );
+
+  font-weight: 700;
+}
+
+.quoteLoading {
+  margin-top: 20px;
+
+  color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  );
+}
 
 /* =========================
    Responsive
@@ -511,25 +660,24 @@
   }
 
   .workCard {
-  min-height: 220px;
+    min-height: 220px;
 
-  padding: 28px;
+    padding: 28px;
 
-  border-radius: 20px;
+    border-radius: 20px;
 
-  background: var(--color-background);
+    background: var(--color-background);
 
-  border: 1px solid var(--color-border);
+    border: 1px solid var(--color-border);
 
-  box-shadow:
-    0 4px 12px
-    rgba(0, 0, 0, 0.04);
-}
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.04);
+  }
 
   .content {
     padding: 20px;
   }
-  
+
   .progressCard {
     padding: 20px;
   }
@@ -570,5 +718,13 @@
 
   .activityTime {
     margin-left: 60px;
+  }
+
+  .quoteCard {
+    padding: 20px;
+  }
+
+  .quoteText {
+    font-size: 1rem;
   }
 }

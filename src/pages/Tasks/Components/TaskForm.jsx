@@ -108,9 +108,9 @@ function TaskForm({
                 className={styles.dropdownMenu}
               >
                 {[
-                  "high",
-                  "medium",
-                  "low",
+                  "High",
+                  "Medium",
+                  "Low",
                 ].map((item) => (
                   <button
                     key={item}
