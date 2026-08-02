@@ -152,7 +152,7 @@ function TaskToolbar({
 
               <button
                 onClick={() => {
-                  setPriorityFilter("High");
+                  setPriorityFilter("high");
                   setIsPriorityOpen(false);
                 }}
               >
@@ -161,7 +161,7 @@ function TaskToolbar({
 
               <button
                 onClick={() => {
-                  setPriorityFilter("Medium");
+                  setPriorityFilter("medium");
                   setIsPriorityOpen(false);
                 }}
               >
@@ -170,7 +170,7 @@ function TaskToolbar({
 
               <button
                 onClick={() => {
-                  setPriorityFilter("Low");
+                  setPriorityFilter("low");
                   setIsPriorityOpen(false);
                 }}
               >
