@@ -50,7 +50,7 @@ function TaskPriorityChart({ tasks = [] }) {
       <div className={styles.chartWrapper}>
         <ResponsiveContainer
           width="100%"
-          height={320}
+          height="100%"
         >
           <PieChart>
             <Pie
@@ -59,7 +59,8 @@ function TaskPriorityChart({ tasks = [] }) {
               nameKey="name"
               cx="50%"
               cy="50%"
-              outerRadius={100}
+              outerRadius="72%"
+              innerRadius="42%"
               label
             >
               {data.map(
@@ -74,7 +75,12 @@ function TaskPriorityChart({ tasks = [] }) {
 
             <Tooltip />
 
-            <Legend />
+            <Legend
+              verticalAlign="bottom"
+              height={36}
+              iconSize={10}
+              wrapperStyle={{ fontSize: 12 }}
+            />
           </PieChart>
         </ResponsiveContainer>
       </div>
