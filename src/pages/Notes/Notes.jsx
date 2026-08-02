@@ -10,6 +10,9 @@ import {
   X,
 } from "lucide-react";
 
+import { logActivity }
+  from "../../utils/activityLogger";
+
 import NoteCard from "./components/NoteCard";
 import NoteModal from "./components/NoteModal";
 import DeleteModal from "./components/DeleteModal";
@@ -220,6 +223,11 @@ function Notes() {
       updatedAt: null,
     };
 
+    logActivity(
+  "Created Note",
+  title
+);
+
     setNotes((prev) => [
       newNote,
       ...prev,
@@ -246,6 +254,11 @@ function Notes() {
       )
     );
 
+    logActivity(
+  "Updated Note",
+  title
+);
+
     setEditingNote(null);
     setIsModalOpen(false);
   };
@@ -262,6 +275,11 @@ function Notes() {
           note.id !== noteToDelete.id
       )
     );
+
+    logActivity(
+  "Deleted Note",
+  noteToDelete.title
+);
 
     setNoteToDelete(null);
   };
@@ -280,6 +298,12 @@ function Notes() {
           item.id !== note.id
       )
     );
+
+    logActivity(
+  "Restored Note",
+  note.title
+);
+
   };
 
   const handleDeleteForever = (

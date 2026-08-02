@@ -2,6 +2,9 @@ import { useState, useEffect, useRef } from "react";
 
 import styles from "./Tasks.module.css";
 
+import { logActivity }
+  from "../../utils/activityLogger";
+
 import TaskToolbar from "./components/TaskToolbar";
 import TaskStats from "./components/TaskStats";
 import TaskForm from "./components/TaskForm";
@@ -193,6 +196,11 @@ function Tasks() {
 
     setTasks([...tasks, newTask]);
 
+    logActivity(
+      "Created Task",
+      taskTitle
+    );
+
     setTaskTitle("");
 
     setDueDate("");
@@ -222,6 +230,10 @@ function Tasks() {
       );
 
     if (taskToTrash) {
+      logActivity(
+        "Deleted Task",
+        taskToTrash.title
+      );
       setTrashedTasks(
         (prev) => [
           taskToTrash,
@@ -255,6 +267,11 @@ function Tasks() {
         (item) =>
           item.id !== task.id
       )
+    );
+    
+    logActivity(
+      "Restored Task",
+      task.title
     );
   };
 
@@ -326,6 +343,11 @@ function Tasks() {
     );
 
     setTasks(updatedTasks);
+
+    logActivity(
+      "Updated Task",
+      taskTitle
+    );
 
     setEditingTask(null);
 

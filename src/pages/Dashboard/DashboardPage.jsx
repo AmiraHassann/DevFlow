@@ -3,6 +3,7 @@ import ContinueWorking from "./components/ContinueWorking";
 import ProgressOverview from "./components/ProgressOverview";
 import TaskPriorityChart from "./components/TaskPriorityChart";
 import ProductivityChart from "./components/ProductivityChart";
+import RecentActivity from "./components/RecentActivity";
 
 import styles from "./Dashboard.module.css";
 
@@ -19,6 +20,11 @@ function DashboardPage() {
   const notes =
     JSON.parse(
       localStorage.getItem("notes")
+    ) || [];
+
+  const activities =
+    JSON.parse(
+      localStorage.getItem("activities")
     ) || [];
 
   /* =========================
@@ -110,6 +116,10 @@ function DashboardPage() {
         {/* =========================
             Recent Activity
         ========================= */}
+
+        <RecentActivity
+          activities={activities}
+        />
 
         {/* =========================
             Quick Actions
