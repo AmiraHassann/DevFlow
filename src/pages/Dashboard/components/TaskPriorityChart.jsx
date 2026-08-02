@@ -34,9 +34,9 @@ function TaskPriorityChart({ tasks = [] }) {
   ];
 
   const COLORS = [
-    "var(--color-danger)",
-    "var(--color-warning)",
-    "var(--color-success)",
+    "#ef4444",
+    "#f59e0b",
+    "#22c55e",
   ];
 
   return (
