@@ -21,6 +21,7 @@ DevFlow combines several productivity tools in one place:
   - Upcoming deadlines
   - Recent activity
   - Productivity insights
+  - A Quote of the Day card that loads a random quote from an external API
 - User settings and preferences
 - Responsive design suitable for different screen sizes
 
@@ -30,6 +31,7 @@ DevFlow combines several productivity tools in one place:
 - Vite
 - React Router
 - Firebase Authentication and Firestore
+- External API integration for the Quote of the Day card
 - Recharts for data visualization
 - CSS Modules for styling
 - Lucide React for icons
